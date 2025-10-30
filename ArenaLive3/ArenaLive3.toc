@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: ArenaLive3 [Core]
+## Notes: Framework for ArenaLive.
+## Author: Vadrak
+## Version: 3.2.0c
+## SavedVariables: ArenaLive_Database
+
+Libs\Load.xml
+
+ArenaLive.xml
