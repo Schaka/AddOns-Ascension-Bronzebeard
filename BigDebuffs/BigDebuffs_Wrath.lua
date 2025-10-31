@@ -695,7 +695,7 @@ addon.Spells = {
     [118895] = { type = CROWD_CONTROL }, -- Dragon Roar
     -- [132168] = { type = CROWD_CONTROL }, -- Shockwave
     [107570] = { type = CROWD_CONTROL }, -- Storm Bolt
-    [132169] = { type = CROWD_CONTROL }, -- Storm Bolt
+    [1572740] = { type = CROWD_CONTROL }, -- Storm Bolt
     [107566] = { type = ROOT }, -- Staggering Shout
     -- [147531] = { type = ROOT }, -- Warbringer
     [137637] = { type = ROOT }, -- Warbringer

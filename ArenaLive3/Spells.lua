@@ -384,6 +384,7 @@ ArenaLive.spellDB = {
 				[118038] = "defCD", -- Die by the Sword
 				[107570] = "stun", -- Storm Bolt
 				[132169] = "stun", -- Storm Bolt
+				[1572740] = "stun", -- Storm Bolt
 				[55694]	= "defCD", -- Enraged Regeneration
 				[114029] = "defCD", -- Safeguard
 				[114030] = "defCD", -- Vigilance

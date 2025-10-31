@@ -69,6 +69,7 @@ local ArenaLiveNamePlates = ArenaLive:ConstructAddon(ArenaLiveNamePlatesFrame, a
 local WAR_MODE = GetSpellInfo(1004119)
 local HIGH_RISK = GetSpellInfo(1004019)
 local function isInPvP()
+	local inInstance, gameType = IsInInstance()
 	local isInPvPZone = gameType == "pvp" or gameType == "arena"
 	local inPvPMode = false
 	for i=1, 60 do
@@ -490,7 +491,6 @@ end
 function NamePlateClass:UpdateAppearance()
 	local blizzPlate = self:GetParent();
 	local database = ArenaLive:GetDBComponent(addonName);
-	local inInstance, gameType = IsInInstance()
     local isInPvP = isInPvP()
     local isPlayer = self.unit and UnitIsPlayer(self.unit)
 
@@ -622,7 +622,6 @@ end
 
 
 function NamePlateClass:UpdateClassIcon()
-    local inInstance, gameType = IsInInstance()
     local isInPvP = isInPvP()
 
 	if ( isInPvP and self.unit and UnitIsPlayer(self.unit) ) then
@@ -688,7 +687,6 @@ function NamePlateClass:Reset()
 end
 
 function NamePlateClass:UpdateUnit(unit)
-    local inInstance, gameType = IsInInstance()
     local isInPvP = isInPvP()
 
     self.unit = unit;
