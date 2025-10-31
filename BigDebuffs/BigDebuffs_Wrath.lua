@@ -451,7 +451,7 @@ addon.Spells = {
     [22842] = { type = BUFF_DEFENSIVE, },  -- Frenzied Regeneration
     [24858] = { type = BUFF_OTHER, }, -- Moonkin Form
     [33357] = { type = BUFF_OTHER, },  -- Dash
-    [33891] = { type = BUFF_OTHER, }, -- Tree of Life
+    --[33891] = { type = BUFF_OTHER, }, -- Tree of Life
     [49802] = { type = CROWD_CONTROL, },  -- Maim
     [49803] = { type = CROWD_CONTROL, },  -- Pounce
     [50334] = { type = BUFF_OFFENSIVE, },  -- Berserk

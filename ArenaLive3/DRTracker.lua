@@ -46,6 +46,14 @@ local DRCache = {};
 DRTracker.elapsed = 0;
 local THROTTLE_INTERVAL = 0.1;
 
+local locSpells = {};
+for spellID,type in pairs(ArenaLive.spellDB["DiminishingReturns"]) do
+	local name = GetSpellInfo(spellID)
+	if name then
+		locSpells[name] = type
+	end
+end
+
 
 
 --[[
@@ -368,7 +376,9 @@ end
 
 function DRTracker:UpdateDiminishingReturn(guid, spellID)
 
-	local drType = ArenaLive.spellDB.DiminishingReturns[spellID];
+	local spellName = GetSpellInfo(spellID)
+	local drType = locSpells[spellName]
+	--local drType = ArenaLive.spellDB.DiminishingReturns[spellID];
 	local drVarType = type(drType);
 	if ( drVarType == "string" ) then
 		DRTracker:SetDiminishingReturn(guid, spellID, drType);
@@ -390,7 +400,7 @@ function DRTracker:SetDiminishingReturn(guid, spellID, drType)
 	end
 	
 	-- Get (new) spell texture:
-	local _, _, texture = GetSpellInfo(spellID);		
+	local spellName, _, texture = GetSpellInfo(spellID);		
 	
 	-- Iterate through all DR tables to check whether the specified DR is already used or not:
 	local match;
@@ -483,8 +493,9 @@ function DRTracker:OnEvent(event, ...)
 		local sourceGUID = select(3, ...);
 		local destGUID = select(6, ...);	
 		local spellID = select(9, ...);
+		local spellName = GetSpellInfo(spellID)
 
-		if ( not ArenaLive.spellDB.DiminishingReturns[spellID] or destGUID == sourceGUID ) then
+		if ( not locSpells[spellName] or destGUID == sourceGUID ) then
 			return;
 		end
 		

@@ -538,7 +538,9 @@ function Icon:UpdateCooldownCache (event, spellName, unit, guid)
 			racialName = GetSpellInfo(racialID)
 		elseif ( race ) then
 			racialID, racialCD = unpack(ArenaLive.spellDB.Racials[race]);
-			racialName = GetSpellInfo(racialID)
+			if racialID then
+				racialName = GetSpellInfo(racialID)
+			end
 		end
 			
 		-- Set cooldown if necessary:

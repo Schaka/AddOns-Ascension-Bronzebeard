@@ -7,14 +7,7 @@ ArenaLive.spellDB = {
 				["NightElf"] = { 1158984, 120, 0}, -- Shadowmeld
 				["Gnome"] = { 20589, 90, 0 },
 				["Draenei"] = { 28880, 180, 0},
-				["Orc"] = { -- Since Orcs also have class-specific racials, we need to add all of them
-					["WARRIOR"] = { 20572, 120, 0 },
-					["HUNTER"] = { 20572, 120, 0 },
-					["ROGUE"] = { 20572, 120, 0 },
-					["SHAMAN"] = { 33697, 120, 0 },
-					["MAGE"] = { 33702, 120, 0 },
-					["WARLOCK"] = { 33702, 120, 0 },
-				},
+				["Orc"] = { 20572, 120, 0 }, -- Since Orcs also have class-specific racials, we need to add all of them
 				["Scourge"] = { 7744, 120, 0 },
 				["Tauren"] = { 20549, 120, 0 },
 				["Troll"] = { 26297, 180, 0 },
