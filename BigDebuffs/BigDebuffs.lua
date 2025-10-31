@@ -936,6 +936,7 @@ function BigDebuffs:AttachNameplate(unit)
     end
 
     frame:ClearAllPoints()
+    frame:SetParent(frame.parent)
     if config[anchorStyle].anchor == "RIGHT" then
         frame:SetPoint("LEFT", frame.anchor, "RIGHT", config[anchorStyle].x, config[anchorStyle].y)
     elseif config[anchorStyle].anchor == "TOP" then
@@ -1967,7 +1968,8 @@ function BigDebuffs:NAME_PLATE_UNIT_ADDED(_, unit)
         end)
     end
 
-    frame.BigDebuffs.anchor = anchor
+    frame.BigDebuffs.anchor = frame
+    frame.BigDebuffs.parent = anchor
 
     self.Nameplates[unit] = frame.BigDebuffs
 
