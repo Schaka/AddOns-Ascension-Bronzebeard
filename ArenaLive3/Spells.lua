@@ -1,23 +1,10 @@
 ArenaLive.spellDB = {
-			["Trinket"] = { 42292, 120 }, -- SpellID and cooldown of the PvP-Trinket
+			["Trinket"] = { 142292, 120 }, -- SpellID and cooldown of the PvP-Trinket
 			["Racials"] = {
 				-- First Number is the SpellID, 2nd one is the CD and 3rd is the shared CD with the PvP-Trinket. Use 0 if they don't have a shared CD.
-				["Human"] =  {
-					["PRIEST"] = { 25437, 600, 0},
-					["WARRIOR"] = {20600, 180, 0},
-					["WARLOCK"] = {20600, 180, 0},
-					["MAGE"] = {20600, 180, 0},
-					["ROGUE"] = {20600, 180, 0},
-					["PALADIN"] = {20600, 180, 0},
-				},
+				["Human"] =  { 59752, 120, 0 },
 				["Dwarf"] = { 20594, 120, 0 },
-				["NightElf"] = {
-					["PRIEST"] = { 2651, 180, 0},
-					["DRUID"] = { 20580, 10, 0},
-					["WARRIOR"] = { 20580, 10, 0},
-					["HUNTER"] = { 20580, 10, 0},
-					["ROGUE"] = { 20580, 10, 0},
-				},
+				["NightElf"] = { 1158984, 120, 0}, -- Shadowmeld
 				["Gnome"] = { 20589, 90, 0 },
 				["Draenei"] = { 28880, 180, 0},
 				["Orc"] = { -- Since Orcs also have class-specific racials, we need to add all of them
@@ -62,7 +49,6 @@ ArenaLive.spellDB = {
 				[25046] = "silence",        -- Arcane Torrent
 				[50613] = "silence",        -- Arcane Torrent
 				[129597] = "silence",        -- Arcane Torrent
-				[107079] = "silence",       -- Quaking Palm (Pandarian)
 
 				-- Other
 				[13099] = "root", -- Net-o-Matic
@@ -436,17 +422,22 @@ ArenaLive.spellDB = {
 		},
 		["Interrupts"] = {
 			-- TO DO: SPEC SPECIFIC SPELLS
-			["DRUID"] = { 8983, 60, false }, 		-- Nature's Cure
+			["DRUID"] = { 16979, 15, false }, 		-- Feral Charge - Bear
 			["HUNTER"] = { 34490, 20, false }, 		-- Silencing Shot
 			["MAGE"] = { 2139, 24, false }, 		-- Counter Spell
-			["PALADIN"] = { 10308, 45, false }, 		-- Cleanse
+			["PALADIN"] = { 10308, 45, false }, 	-- HoJ
 			["PRIEST"] = { 10890, 27, false }, 		-- Purify
-			["ROGUE"] = { 38768, 10, false }, 		-- Kick
+			["ROGUE"] = { 1766, 10, false }, 		-- Kick
 			["WARRIOR"] = { 6554, 10, false },		-- Pummel
-			["SHAMAN"] = { 8042, 6, false },
+			["SHAMAN"] = { 57994, 6, false },		-- Wind Shear
 			["WARLOCK"] = { 19647, 24, false },	
 		},
 		["SharedCooldowns"] = {
+			[59752] = { 142292, 120 }, -- PvP trinket
+			[59752] = { 65547, 120 }, -- PvP trinket
+			[59752] = { 42292, 120 }, -- PvP trinket
+			[6552] = { 72, 10 }, -- Pummel -> Shield Bash
+			[72] = { 6552, 10 }, -- Shield Bash -> Pummel
 		},
 		["DiminishingReturns"] =
 		{						
