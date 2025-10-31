@@ -66,6 +66,22 @@ ArenaLiveNamePlatesFrame.defaults = {
 
 local ArenaLiveNamePlates = ArenaLive:ConstructAddon(ArenaLiveNamePlatesFrame, addonName, false, ArenaLiveNamePlatesFrame.defaults, false, "ALNP_Database")
 
+local WAR_MODE = GetSpellInfo(1004119)
+local HIGH_RISK = GetSpellInfo(1004019)
+local function isInPvP()
+	local isInPvPZone = gameType == "pvp" or gameType == "arena"
+	local inPvPMode = false
+	for i=1, 60 do
+		local name = UnitBuff("player", i)
+		if not name then break end
+		if name == WAR_MODE or name == HIGH_RISK then
+			inPvPMode = true
+			break;
+		end
+	end	
+	return isInPvPZone or ( inPvPMode and not IsResting())
+end
+
 --[[
 **************************************************
 ******* GENERAL HANDLER SET UP STARTS HERE *******
@@ -475,7 +491,7 @@ function NamePlateClass:UpdateAppearance()
 	local blizzPlate = self:GetParent();
 	local database = ArenaLive:GetDBComponent(addonName);
 	local inInstance, gameType = IsInInstance()
-    local isInPvP = gameType == "pvp" or gameType == "arena"
+    local isInPvP = isInPvP()
     local isPlayer = self.unit and UnitIsPlayer(self.unit)
 
 	if ( isInPvP and self.unit and isPlayer ) then
@@ -607,7 +623,7 @@ end
 
 function NamePlateClass:UpdateClassIcon()
     local inInstance, gameType = IsInInstance()
-    local isInPvP = gameType == "pvp" or gameType == "arena"
+    local isInPvP = isInPvP()
 
 	if ( isInPvP and self.unit and UnitIsPlayer(self.unit) ) then
 		local _, class = UnitClass(self.unit);
@@ -673,7 +689,7 @@ end
 
 function NamePlateClass:UpdateUnit(unit)
     local inInstance, gameType = IsInInstance()
-    local isInPvP = gameType == "pvp" or gameType == "arena"
+    local isInPvP = isInPvP()
 
     self.unit = unit;
     if ( unit and isInPvP and UnitIsPlayer(unit) ) then
