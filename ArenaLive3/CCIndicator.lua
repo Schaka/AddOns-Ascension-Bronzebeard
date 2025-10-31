@@ -35,6 +35,7 @@ CCIndicator.canToggle = true;
 CCIndicator:RegisterEvent("UNIT_AURA", "UpdateCache");
 CCIndicator:RegisterEvent("PLAYER_TARGET_CHANGED", "UpdateCache");
 CCIndicator:RegisterEvent("PLAYER_FOCUS_CHANGED", "UpdateCache");
+CCIndicator:RegisterEvent("ADDON_LOADED", "ADDON_LOADED");
 
 -- Create CC cache. This will be sorted by unitID and inside the unitID table by spellID:
 local unitCCCache = {};
@@ -97,7 +98,7 @@ function CCIndicator:Update (unitFrame)
 
 	-- if BigDebuffs is enabled, we "steal" spell data
     -- it has support for a lot more stuff than ArenaLive directly and adding anchor support for ArenaLive to BigDebuffs makes less sense imo
-    if IsAddOnLoaded("BigDebuffs") and false then -- FIXME
+    if IsAddOnLoaded("BigDebuffs") then
         local bigDebuffsFrame = BigDebuffs.UnitFrames[unit] or BigDebuffs.Nameplates[unit]
 
         -- only read values if the frame is in use
@@ -109,7 +110,7 @@ function CCIndicator:Update (unitFrame)
             indicator.texture:SetTexture(icon);
             -- custom duration set to 1 for auras like smokebomb, druid forms etc
             if duration > 1000 then
-                indicator.cooldown:Set(startTime / 1000, duration  / 1000);
+                indicator.cooldown:Set(startTime, duration  / 1000);
             else
                 indicator.cooldown:Set(0,0);
             end
@@ -274,6 +275,23 @@ function CCIndicator:UpdateCache (event, unit, denyUpdate)
 			end
 		end
 	end
+end
+
+function CCIndicator:ADDON_LOADED (event, addonName)
+    if addonName == "BigDebuffs" then
+        print("BigDebuffs loaded, ArenaLive will use it instead of of its own CCIndicator")
+        hooksecurefunc(BigDebuffs, "UNIT_AURA", function(frame, unit, spellId)
+            if ArenaLive:GetAffectedUnitFramesByUnit(unit) then
+                for id in ArenaLive:GetAffectedUnitFramesByUnit(unit) do
+                    local unitFrame = ArenaLive:GetUnitFrameByID(id);
+                    if ( unitFrame[self.name] ) then
+                         -- we need to wait for BigDebuffs to update successfully first
+                         CCIndicator:Update(unitFrame);
+                    end
+                end
+            end
+        end)
+    end
 end
 
 

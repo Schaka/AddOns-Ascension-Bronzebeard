@@ -25,7 +25,7 @@ function C_Spell.GetSpellDescription(ID)
 
 	local Num = Tooltip:NumLines()
 	if ( Num > 0 ) then
-		return _G["__CAPIScanTooltipTextLeft"..Num]:GetText()
+		return _G[Tooltip:GetName().."TextLeft"..Num]:GetText()
 	end
 end
 

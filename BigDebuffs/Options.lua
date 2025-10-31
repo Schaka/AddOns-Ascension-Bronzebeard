@@ -125,6 +125,13 @@ for spellID, spell in pairs(BigDebuffs.Spells) do
                             width = "full",
                             order = 2
                         },
+                        nameplates = {
+                            type = "toggle",
+                            name = "Nameplates",
+                            desc = L["Show this spell on nameplates"],
+                            width = "full",
+                            order = 3
+                        },
                     },
                 },
                 priority = {
@@ -1176,6 +1183,302 @@ function BigDebuffs:SetupOptions()
                     },
                 }
             },
+            nameplates = {
+				type = "group",
+				disabled = function(info) return info[2] and not self.db.profile[info[1]].enabled end,
+                childGroups = "tab",
+                get = function(info) local name = info[#info] return self.db.profile.nameplates[name] end,
+                set = function(info, value)
+                    local name = info[#info]
+                    self.db.profile.nameplates[name] = value
+                    self:Refresh()
+                end,
+				args = {
+					enabled = {
+						type = "toggle",
+						disabled = false,
+						name = L["Enabled"],
+						order = 1,
+						desc = L["Enable BigDebuffs on the nameplates"],
+					},
+					enemy = {
+						type = "toggle",
+						name = "Enemy Nameplates",
+						order = 1,
+						desc = L["Enable BigDebuffs on enemy nameplates"],
+					},
+					friendly = {
+						type = "toggle",
+						name = "Friendly Nameplates",
+						order = 1,
+						desc = L["Enable BigDebuffs on friendly nameplates"],
+					},
+					npc = {
+						type = "toggle",
+						name = "NPC Nameplates",
+						order = 1,
+						width = "normal",
+						desc = L["Enable BigDebuffs on non-player nameplates"],
+					},
+					cooldownCount = {
+                        type = "toggle",
+                        width = "normal",
+                        name = L["Cooldown Count"],
+                        desc = L["Allow Blizzard and other addons to display countdown text on the icons"],
+                        order = 2,
+                    },
+                    tooltips = {
+                        type = "toggle",
+                        width = "normal",
+                        name = L["Show Tooltips"],
+                        desc = L["Show spell information when mousing over the icon"],
+                        order = 2,
+                    },
+                    cooldownFontSize = {
+                        type = "range",
+                        name = L["Font Size"],
+                        desc = L["Set the cd timers font size"],
+                        min = 1,
+                        max = 30,
+                        step = 1,
+                        order = 4,
+                    },
+                    cooldownFontEffect = {
+                        type = "select",
+                        name = L["Font Effect"],
+                        desc = L["Set the cd timers font effect"],
+                        values = {
+                            ["MONOCHROME"] = "MONOCHROME",
+                            ["OUTLINE"] = "OUTLINE",
+                            ["THICKOUTLINE"] = "THICKOUTLINE",
+                            [""] = "NONE",
+                        },
+                        order = 5,
+                    },
+					spells = {
+                        order = 7,
+                        name = L["Spells"],
+                        type = "group",
+                        inline = true,
+                        args = {
+                            cc = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["cc"],
+                                desc = L["Show Crowd Control on nameplates"],
+                                order = 1,
+                            },
+                            immunities = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["immunities"],
+                                desc = L["Show Immunities on nameplates"],
+                                order = 2,
+                            },
+                            interrupts = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["interrupts"],
+                                desc = L["Show Interrupts on nameplates"],
+                                order = 3,
+                            },
+                            immunities_spells = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["immunities_spells"],
+                                desc = L["Show Spell Immunities on nameplates"],
+                                order = 4,
+                            },
+                            buffs_defensive = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["buffs_defensive"],
+                                desc = L["Show Defensive Buffs on nameplates"],
+                                order = 5,
+                            },
+                            buffs_offensive = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["buffs_offensive"],
+                                desc = L["Show Offensive Buffs on nameplates"],
+                                order = 6,
+                            },
+                            debuffs_offensive = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["debuffs_offensive"],
+                                desc = L["Show Offensive Debuffs on nameplates"],
+                                order = 7,
+                            },
+                            buffs_other = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["buffs_other"],
+                                desc = L["Show Other Buffs on nameplates"],
+                                order = 8,
+                            },
+                            roots = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["roots"],
+                                desc = L["Show Roots on nameplates"],
+                                order = 9,
+                            },
+                            buffs_speed_boost = {
+                                type = "toggle",
+                                width = "normal",
+                                name = L["buffs_speed_boost"],
+                                desc = L["Show Speed Boosts on nameplates"],
+                                order = 10,
+                            },
+                        },
+                    },
+                    enemyAnchor = {
+                        type = "group",
+                        name = L["Anchor"],
+                        get = function(info)
+                            local name = info[#info]
+                            return self.db.profile.nameplates.enemyAnchor[name]
+                        end,
+                        set = function(info, value)
+                            local name = info[#info]
+                            self.db.profile.nameplates.enemyAnchor[name] = value
+                            self:Refresh()
+                        end,
+                        order = 9,
+                        args = {
+                            anchor = {
+                                name = L["Anchor"],
+                                desc = L["Anchor to attach the BigDebuffs frames"],
+                                width = "normal",
+                                type = "select",
+                                values = {
+                                    ["RIGHT"] = L["RIGHT"],
+                                    ["TOP"] = L["TOP"],
+                                    ["BOTTOM"] = L["BOTTOM"],
+                                    ["LEFT"] = L["LEFT"],
+                                },
+                                order = 1,
+                            },
+                            size = {
+                                type = "range",
+                                name = L["Size"],
+                                desc = L["Set the size of the frame"],
+                                width = "double",
+                                min = 8,
+                                max = 100,
+                                step = 1,
+                                order = 2,
+                            },
+                            x = {
+                                type = "range",
+                                name = L["X offset"],
+                                desc = L["Set the X offset"],
+                                width = 1.5,
+                                min = -100,
+                                max = 100,
+                                step = 1,
+                                order = 3,
+                            },
+                            y = {
+                                type = "range",
+                                name = L["Y offset"],
+                                desc = L["Set the Y offset"],
+                                width = 1.5,
+                                min = -100,
+                                max = 100,
+                                step = 1,
+                                order = 4,
+                            },
+                        },
+					},
+                    friendlyAnchor = {
+                        type = "group",
+                        name = L["Friendly Anchor"],
+                        get = function(info)
+                            local name = info[#info]
+                            return self.db.profile.nameplates.friendlyAnchor[name]
+                        end,
+                        set = function(info, value)
+                            local name = info[#info]
+                            self.db.profile.nameplates.friendlyAnchor[name] = value
+                            self:Refresh()
+                        end,
+                        order = 9,
+                        args = {
+                            friendlyAnchorEnabled = {
+                                name = L["Enable Friendly Anchor"],
+                                desc = "Use a separate anchor for friendly nameplates. If disabled, will use the primary anchor settings instead",
+                                type = "toggle",
+                                width = "full",
+                                order = 1,
+                            },
+                            anchor = {
+                                name = L["Anchor"],
+                                desc = L["Anchor to attach the BigDebuffs frames"],
+                                type = "select",
+                                width = "normal",
+                                values = {
+                                    ["RIGHT"] = L["RIGHT"],
+                                    ["TOP"] = L["TOP"],
+                                    ["BOTTOM"] = L["BOTTOM"],
+                                    ["LEFT"] = L["LEFT"],
+                                },
+                                disabled = function(info)
+                                    local name = info[2]
+                                    return not self.db.profile.nameplates[name].friendlyAnchorEnabled
+                                end,
+                                order = 2,
+                            },
+                            size = {
+                                type = "range",
+                                name = L["Size"],
+                                desc = L["Set the size of the frame"],
+                                width = "double",
+                                min = 8,
+                                max = 100,
+                                step = 1,
+                                disabled = function(info)
+                                    local name = info[2]
+                                    return not self.db.profile.nameplates[name].friendlyAnchorEnabled
+                                end,
+                                order = 3,
+                            },
+                            x = {
+                                type = "range",
+                                name = L["X offset"],
+                                desc = L["Set the X offset"],
+                                width = 1.5,
+                                min = -100,
+                                max = 100,
+                                step = 1,
+                                disabled = function(info)
+                                    local name = info[2]
+                                    return not self.db.profile.nameplates[name].friendlyAnchorEnabled
+                                end,
+                                order = 4,
+                            },
+                            y = {
+                                type = "range",
+                                name = L["Y offset"],
+                                desc = L["Set the Y offset"],
+                                width = 1.5,
+                                min = -100,
+                                max = 100,
+                                step = 1,
+                                disabled = function(info)
+                                    local name = info[2]
+                                    return not self.db.profile.nameplates[name].friendlyAnchorEnabled
+                                end,
+                                order = 5,
+                            },
+                        },
+					},
+				},
+				name = L["Nameplates"],
+				desc = L["Enable BigDebuffs on the nameplates"],
+				order = 30,
+			},
             spells = {
                 name = L["Spells"],
                 type = "group",

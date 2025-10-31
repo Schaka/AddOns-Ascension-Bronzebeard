@@ -419,7 +419,7 @@ function NamePlate:OnEvent(event, ...)
 
     elseif (event == "ADDON_LOADED" ) then
         local addonName = ...
-        if addonName == "BigDebuffs" and false then -- FIXME
+        if addonName == "BigDebuffs" then
             hooksecurefunc(BigDebuffs, "UNIT_AURA_NAMEPLATE", function(frame, unit)
                 for blizzPlate, namePlate in pairs(self.namePlates) do
                     if ( unit == namePlate.unit ) then

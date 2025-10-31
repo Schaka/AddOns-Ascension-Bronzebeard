@@ -101,6 +101,40 @@ local defaults = {
             roots = true,
             buffs_speed_boost = true,
         },
+        nameplates = {
+            enabled = true,
+            cooldownCount = true,
+            cooldownFontSize = 16,
+            cooldownFontEffect = "OUTLINE",
+            cooldownFont = "Friz Quadrata TT",
+            tooltips = true,
+            enemy = true,
+            friendly = true,
+            npc = true,
+            enemyAnchor = {
+                anchor = "TOP",
+                size = 40,
+                x = 0,
+                y = 0,
+            },
+            friendlyAnchor = {
+                friendlyAnchorEnabled = false,
+                anchor = "TOP",
+                size = 40,
+                x = 0,
+                y = 0,
+            },
+            cc = true,
+            interrupts = true,
+            immunities = true,
+            immunities_spells = true,
+            buffs_defensive = true,
+            buffs_offensive = true,
+            buffs_other = true,
+            debuffs_offensive = true,
+            roots = true,
+            buffs_speed_boost = true,
+        },
         priority = {
             immunities = 80,
             immunities_spells = 70,
@@ -344,6 +378,129 @@ local GetAnchor = {
     end,
 }
 
+local GetNameplateAnchor = {
+    ElvUINameplates = function(frame)
+        if frame.unitFrame and frame.unitFrame.Health and frame.unitFrame.Health:IsShown() then
+            return frame.unitFrame.Health, frame.unitFrame
+        elseif frame.unitFrame then
+            return frame.unitFrame, frame.unitFrame
+        end
+    end,
+    KuiNameplate = function(frame)
+        if frame.kui and frame.kui.HealthBar and frame.kui.HealthBar:IsShown() then
+            return frame.kui.HealthBar, frame.kui
+        elseif frame.kui and frame.kui.NameText and frame.kui.NameText:IsShown() then
+            return frame.kui.NameText, frame.kui
+        elseif frame.kui then
+            return frame.kui, frame.kui
+        end
+    end,
+    Plater = function(frame)
+        if frame.unitFrame and frame.unitFrame.healthBar and frame.unitFrame.healthBar:IsShown() then
+            return frame.unitFrame.healthBar, frame.unitFrame
+        elseif frame.unitFrame and frame.unitFrame.ActorNameSpecial and frame.unitFrame.ActorNameSpecial:IsShown() then
+            return frame.unitFrame.ActorNameSpecial, frame.unitFrame
+        elseif frame.unitFrame then
+            return frame.unitFrame, frame.unitFrame
+        end
+    end,
+    NeatPlates = function(frame)
+        if frame.carrier and frame.extended and frame.extended.bars and frame.carrier:IsShown() then
+            return frame.extended.bars.healthbar, frame.extended
+        end
+    end,
+    ThreatPlates = function(frame)
+        if frame.TPFrame.GetAnchor then
+            return frame.TPFrame:GetAnchor()
+        elseif frame.UnitFrame:IsShown() then
+            return frame.UnitFrame, frame.UnitFrame
+        else
+            -- Fallback solution if TP was not yet updated and GetAnchor is not available.
+            return frame.TPFrame, frame.TPFrame
+        end
+    end,
+    TidyPlates = function(frame)
+        if frame.carrier and frame.extended and frame.extended.bars and frame.carrier:IsShown() then
+            return frame.extended.bars.healthbar, frame.extended
+        end
+    end,
+    oUF = function(frame)
+        return frame.unitFrame.Health, frame.unitFrame
+    end,
+    Blizzard = function(frame)
+        if frame.UnitFrame and frame.UnitFrame.healthBar and frame.UnitFrame.healthBar:IsShown() then
+            return frame.UnitFrame.healthBar, frame.UnitFrame
+        elseif frame.UnitFrame and frame.UnitFrame.name and frame.UnitFrame.name:IsShown() then
+            return frame.UnitFrame.name, frame.UnitFrame    
+        elseif frame.UnitFrame then
+            return frame.UnitFrame, frame.UnitFrame
+        end
+
+        local healthBar, castBar = frame:GetChildren()
+        if healthBar then
+            return healthBar, frame
+        end
+
+        return frame, frame
+    end,
+}
+
+local nameplatesAnchors = {
+    [1] = {
+        used = function()
+            return ElvUI and ElvUI[1].NamePlates and ElvUI[1].NamePlates.Initialized
+        end,
+        func = GetNameplateAnchor.ElvUINameplates,
+    },
+    [2] = {
+        used = function()
+            return NDui and NDui[2].db.Nameplate.Enable
+        end,
+        func = GetNameplateAnchor.ElvUINameplates, -- all by oUF
+    },
+    [3] = {
+        used = function()
+            return KuiNameplates ~= nil
+        end,
+        func = GetNameplateAnchor.KuiNameplate,
+    },
+    [4] = {
+        used = function()
+            return Plater ~= nil
+        end,
+        func = GetNameplateAnchor.Plater,
+    },
+    [5] = {
+        used = function()
+            return NeatPlates ~= nil
+        end,
+        func = GetNameplateAnchor.NeatPlates,
+    },
+    [6] = {
+        used = function(frame)
+            -- IsAddOnLoaded("TidyPlates_ThreatPlates") should be better
+            return TidyPlatesThreat ~= nil
+        end,
+        func = GetNameplateAnchor.ThreatPlates,
+    },
+    [7] = {
+        used = function()
+            return TidyPlates ~= nil
+        end,
+        func = GetNameplateAnchor.TidyPlates,
+    },
+    [8] = {
+        used = function()
+            return _G.oUF_NamePlateDriver
+        end,
+        func = GetNameplateAnchor.oUF,
+    },
+    [9] = {
+        used = function(frame) return frame and frame:GetAlpha() > 0 end,
+        func = GetNameplateAnchor.Blizzard,
+    },
+}
+
 local anchors = {
     ["GladiusExParty"] = {
         noPortait = true,
@@ -554,6 +711,7 @@ function BigDebuffs:OnInitialize()
     self.db.RegisterCallback(self, "OnProfileReset", "Refresh")
     self.frames = {}
     self.UnitFrames = {}
+    self.Nameplates = {}
     self:SetupOptions()
 end
 
@@ -575,6 +733,20 @@ function BigDebuffs:Refresh()
         --frame.cooldown:SetHideCountdownNumbers(not self.db.profile.unitFrames.cooldownCount)
         frame.cooldown.noCooldownCount = not self.db.profile.unitFrames.cooldownCount
         self:UNIT_AURA(unit)
+    end
+    for unit, frame in pairs(self.Nameplates) do
+        frame:Hide()
+        frame.current = nil
+        if self.db.profile.unitFrames.cooldownCount then
+            local text = frame.cooldown:GetRegions()
+            if text then
+                text:SetFont(LibSharedMedia:Fetch("font", BigDebuffs.db.profile.unitFrames.cooldownFont),
+                    self.db.profile.unitFrames.cooldownFontSize, self.db.profile.unitFrames.cooldownFontEffect)
+            end
+        end
+        --frame.cooldown:SetHideCountdownNumbers(not self.db.profile.unitFrames.cooldownCount)
+        frame.cooldown.noCooldownCount = not self.db.profile.unitFrames.cooldownCount
+        self:UNIT_AURA_NAMEPLATE(unit)
     end
 end
 
@@ -738,6 +910,51 @@ function BigDebuffs:AttachUnitFrame(unit)
     end
 end
 
+function BigDebuffs:AttachNameplate(unit)
+    local frame = self.Nameplates[unit]
+    if (not frame) then
+        return
+    end
+
+    local config = self.db.profile.nameplates
+
+    if config.cooldownCount then
+        local text = frame.cooldown:GetRegions()
+        if text then
+            text:SetFont(LibSharedMedia:Fetch("font", config.cooldownFont),
+                config.cooldownFontSize, config.cooldownFontEffect)
+        end
+    end
+    --frame.cooldown:SetHideCountdownNumbers(not config.cooldownCount)
+    frame.cooldown.noCooldownCount = not config.cooldownCount
+
+    frame:EnableMouse(config.tooltips)
+
+    local anchorStyle = "enemyAnchor"
+    if (not UnitCanAttack("player", unit) and config["friendlyAnchor"].friendlyAnchorEnabled == true) then
+        anchorStyle = "friendlyAnchor"
+    end
+
+    frame:ClearAllPoints()
+    if config[anchorStyle].anchor == "RIGHT" then
+        frame:SetPoint("LEFT", frame.anchor, "RIGHT", config[anchorStyle].x, config[anchorStyle].y)
+    elseif config[anchorStyle].anchor == "TOP" then
+        frame:SetPoint("BOTTOM", frame.anchor, "TOP", config[anchorStyle].x, config[anchorStyle].y)
+    elseif config[anchorStyle].anchor == "LEFT" then
+        frame:SetPoint("RIGHT", frame.anchor, "LEFT", config[anchorStyle].x, config[anchorStyle].y)
+    elseif config[anchorStyle].anchor == "BOTTOM" then
+        frame:SetPoint("TOP", frame.anchor, "BOTTOM", config[anchorStyle].x, config[anchorStyle].y)
+    end
+
+    frame:SetSize(config[anchorStyle].size, config[anchorStyle].size)
+    -- If Masque is installed then apply skin.
+    if Masque ~= nil then
+        BigDebuffs.MasqueGroup.NamePlate:AddButton(frame)
+        -- No idea why I need to re-skin, but this fixes the size...
+        BigDebuffs.MasqueGroup.NamePlate:ReSkin(frame.Icon)
+    end
+end
+
 function BigDebuffs:SaveUnitFramePosition(frame)
     self.db.profile.unitFrames[frame.unit].position = { frame:GetPoint() }
 end
@@ -768,6 +985,9 @@ function BigDebuffs:OnEnable()
     self:RegisterEvent("PLAYER_ENTERING_WORLD")
     self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
     self:RegisterEvent("PLAYER_FOCUS_CHANGED")
+
+    self:RegisterEvent("NAME_PLATE_UNIT_ADDED")
+    self:RegisterEvent("NAME_PLATE_UNIT_REMOVED")
 
     if ( IsAddOnLoaded("CompactRaidFrame") ) then
         self:ADDON_LOADED(self, "CompactRaidFrame")
@@ -846,6 +1066,10 @@ function BigDebuffs:UNIT_AURA_ALL_UNITS()
 
         if not unit:match("^raid") then
             self:UNIT_AURA(unit)
+        end
+
+        if unit:find("nameplate") then
+            self:UNIT_AURA_NAMEPLATE(unit)
         end
     end
 end
@@ -1045,6 +1269,31 @@ function BigDebuffs:GetAuraPriority(spellName, id)
 
     if self.SpellNames[spellName].nounitFrames and
         (not self.db.profile.spells[id] or not self.db.profile.spells[id].unitFrames)
+    then
+        return
+    end
+
+    return self.db.profile.priority[self.SpellNames[spellName].type] or 0
+end
+
+-- For nameplates
+function BigDebuffs:GetNameplatesPriority(spellName, id)
+    if not self.SpellNames[spellName] then return end
+    id = self.SpellNames[spellName].parent or spellName -- Check for parent spellID
+
+    -- Make sure category is enabled
+    if not self.db.profile.nameplates[self.SpellNames[spellName].type] then return end
+
+    --[[ FIXME
+    -- Check for user set
+    if self.db.profile.spells[id] then
+        if self.db.profile.spells[id].nameplates and self.db.profile.spells[id].nameplates == 0 then return end
+        if self.db.profile.spells[id].priority then return self.db.profile.spells[id].priority end
+    end
+    ]]
+
+    if self.SpellNames[spellName].nonameplates and
+        (not self.db.profile.spells[id] or not self.db.profile.spells[id].nameplates)
     then
         return
     end
@@ -1542,6 +1791,111 @@ function BigDebuffs:UNIT_AURA(unit)
     end
 end
 
+function BigDebuffs:UNIT_AURA_NAMEPLATE(unit)
+    if not self.db.profile.nameplates.enabled then return end
+    self:AttachNameplate(unit)
+
+    local frame = self.Nameplates[unit]
+    if not frame then return end
+
+    local UnitDebuff = BigDebuffs.test and UnitDebuffTest or UnitDebuff
+
+    local now = GetTime()
+    local left, priority, duration, expires, icon, debuff, buff, interrupt = 0, 0
+
+    for i = 1, 40 do
+        -- Check debuffs
+        local name, _, n, _, _, d, e, caster, _, _, id = UnitDebuff(unit, i)
+        if name then
+            if self.SpellNames[name] then
+                local reaction = caster and UnitReaction("player", caster) or 0
+                local friendlySmokeBomb = id == 212183 and reaction > 4
+                local p = self:GetNameplatesPriority(name, id)
+                if p and p >= priority and not friendlySmokeBomb then
+                    if p > priority or self:IsPriorityBigDebuff(id) or e == 0 or e - now > left then
+                        left = e - now
+                        duration = d
+                        debuff = i
+                        priority = p
+                        expires = e
+                        icon = n
+                    end
+                end
+            end
+        end
+
+        -- Check buffs
+    
+        name, _, n, _, _, d, e, caster, _, _, id = UnitBuff(unit, i)
+        if name then
+            if self.SpellNames[name] then
+                local p = self:GetNameplatesPriority(name, id)
+                if p and p >= priority then
+                    if p > priority or self:IsPriorityBigDebuff(id) or e == 0 or e - now > left then
+                        left = e - now
+                        duration = d
+                        debuff = i
+                        priority = p
+                        expires = e
+                        icon = n
+                        buff = true
+                    end
+                end
+            end
+        end
+    end
+
+    -- Check for interrupt
+    local guid = UnitGUID(unit)
+    if guid and self.units[guid] and self.units[guid].expires and self.units[guid].expires > GetTime() then
+        local spell = self.units[guid]
+        local spellId = spell.spellId
+        local spellName = GetSpellInfo(spell.spellId)
+        local p = self:GetNameplatesPriority(spellName, spellId)
+        if p and p >= priority then
+            left = spell.expires - now
+            duration = self.Spells[spellId].duration
+            debuff = spellId
+            expires = spell.expires
+            icon = GetSpellTexture(spellId)
+            interrupt = spellId
+        end
+    end
+
+
+    if debuff then
+        if duration < 1 then duration = 1 end -- auras like Solar Beam don't have a duration
+
+        if frame.current ~= icon then
+            frame.icon:SetTexture(icon)
+        end
+
+        frame.cooldown:SetCooldown(expires - duration, duration)
+        frame:Show()
+        --frame.cooldown:SetSwipeColor(0, 0, 0, 0.6)
+
+        -- set for tooltips
+        frame:SetID(debuff)
+        frame.buff = buff
+        frame.interrupt = interrupt
+        frame.current = icon
+    else
+        frame:Hide()
+        frame.current = nil
+    end
+
+    --Hide/Disable auras which shouldn't be shown. Seems to fix false icons from appearing and getting stuck.
+    if frame.current ~= nil and (not unit:find("nameplate")
+        or (not UnitCanAttack("player", unit) and not self.db.profile.nameplates.friendly)
+        or (UnitCanAttack("player", unit) and not self.db.profile.nameplates.enemy)
+        or (not UnitIsPlayer(unit) and not self.db.profile.nameplates.npc)
+        or (UnitIsUnit("player", unit)))
+    then
+        frame:Hide()
+        frame.current = nil
+    end
+end
+
 function BigDebuffs:PLAYER_FOCUS_CHANGED()
     self:UNIT_AURA("focus")
 end
@@ -1562,6 +1916,87 @@ function BigDebuffs:ShowInRaids()
     end
 
     return true;
+end
+
+function BigDebuffs:NAME_PLATE_UNIT_ADDED(_, unit)
+    local namePlate = C_NamePlate.GetNamePlateForUnit(unit)
+
+    local anchor, frame
+
+    for k, v in ipairs(nameplatesAnchors) do
+        if v.used(namePlate) then
+            anchor, frame = v.func(namePlate)
+            break
+        end
+    end
+
+    if not frame or not anchor then return end
+
+    if not frame.BigDebuffs then
+        frame.BigDebuffs = CreateFrame("Button", "$parent.BigDebuffs", frame)
+        frame.BigDebuffs:SetFrameLevel(frame:GetFrameLevel())
+
+        frame.BigDebuffs.icon = frame.BigDebuffs:CreateTexture("$parent.Icon", "OVERLAY", nil, 3)
+        frame.BigDebuffs.icon:SetAllPoints(frame.BigDebuffs)
+
+        frame.BigDebuffs.cooldown = CreateFrame("Cooldown", "$parent.Cooldown", frame.BigDebuffs, "CooldownFrameTemplate")
+        frame.BigDebuffs.cooldown:SetAllPoints(frame.BigDebuffs)
+        frame.BigDebuffs.cooldown:SetDrawEdge(false)
+        frame.BigDebuffs.cooldown:SetAlpha(1)
+        --frame.BigDebuffs.cooldown:SetDrawBling(false)
+        --frame.BigDebuffs.cooldown:SetDrawSwipe(true)
+        frame.BigDebuffs.cooldown:SetReverse(true)
+
+        frame.BigDebuffs:SetScript("OnEnter", function(self)
+            if (BigDebuffs.db.profile.nameplates.tooltips) then
+                BigDebuffsNameplateTooltip:SetOwner(self, "ANCHOR_RIGHT", 0, 0);
+                if self.interrupt then
+                    BigDebuffsNameplateTooltip:SetSpellByID(self.interrupt)
+                elseif self.buff then
+                    BigDebuffsNameplateTooltip:SetUnitBuff(self.unit, self:GetID());
+                else
+                    BigDebuffsNameplateTooltip:SetUnitDebuff(self.unit, self:GetID());
+                end
+            elseif BigDebuffsNameplateTooltip:IsOwned(self) then
+                BigDebuffsNameplateTooltip:Hide();
+            end
+        end)
+
+        frame.BigDebuffs:SetScript("OnLeave", function()
+            BigDebuffsNameplateTooltip:Hide()
+        end)
+    end
+
+    frame.BigDebuffs.anchor = anchor
+
+    self.Nameplates[unit] = frame.BigDebuffs
+
+    frame.BigDebuffs.unit = unit
+    frame.BigDebuffs:RegisterUnitEvent("UNIT_AURA", unit)
+    frame.BigDebuffs:SetScript("OnEvent", function()
+        self:UNIT_AURA_NAMEPLATE(unit)
+    end)
+
+    self:UNIT_AURA_NAMEPLATE(unit)
+
+    table.insert(unitsWithRaid, unit)
+end
+
+function BigDebuffs:NAME_PLATE_UNIT_REMOVED(_, unit)
+    local frame = self.Nameplates[unit]
+
+    -- Seems like a good idea to remove old nameplate frames from the group.
+    if Masque ~= nil then
+        BigDebuffs.MasqueGroup.NamePlate:RemoveButton(frame)
+    end
+
+    if frame then frame:UnregisterEvent("UNIT_AURA") end
+
+    for i = 1, #unitsWithRaid do
+        if (unitsWithRaid[i] == unit) then
+            table.remove(unitsWithRaid, i)
+        end
+    end
 end
 
 function BigDebuffs:ADDON_LOADED(self, addon)
