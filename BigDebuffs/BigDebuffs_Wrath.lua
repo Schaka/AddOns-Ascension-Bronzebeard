@@ -145,6 +145,8 @@ addon.Spells = {
     -- Interrupts
 
     [15752] = { type = INTERRUPT, duration = 10 }, -- Linken's Boomerang Disarm
+    [1119244] = { type = INTERRUPT, duration = 5 }, -- Spell Lock - Rank 1 (Ascension)
+        [1119647] = { parent = 19244, duration = 6 }, -- Spell Lock - Rank 2 (Ascension)
     [19244] = { type = INTERRUPT, duration = 5 }, -- Spell Lock - Rank 1 (Warlock)
         [19647] = { parent = 19244, duration = 6 }, -- Spell Lock - Rank 2 (Warlock)
     [13491] = { type = INTERRUPT, duration = 5 }, -- Iron Knuckles
@@ -592,7 +594,7 @@ addon.Spells = {
     [111340] = { type = ROOT }, -- Ice Ward
     [121288] = { type = ROOT }, -- Chilled (Frost Armor)
     [113092] = { type = ROOT }, -- Frost Bomb
-    [110909] = { type = BUFF_DEFENSIVE }, -- Alter Time
+    [1436397] = { type = BUFF_DEFENSIVE }, -- Alter Time
     [115610] = { type = BUFF_DEFENSIVE }, -- Temporal Shield
 
     -- Rogue

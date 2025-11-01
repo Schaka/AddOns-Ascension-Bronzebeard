@@ -192,7 +192,7 @@ ArenaLive.spellDB = {
 				[82691] = "crowdControl",	-- Ring of Frost
 				[31661] = "crowdControl",	-- Dragon's Breath
 				[111340] = "root",			-- Ice Ward Root
-				[110909] = "offCD",	        -- Alter Time
+				[1436397] = "offCD",	    -- Alter Time
 				[111264] = "usefulBuffs",	-- Ice Ward (buff)
 				[44544] = "usefulBuffs",	-- Fingers of Frost
 				[11426] = "usefulBuffs",	-- Ice Barrier
@@ -321,6 +321,7 @@ ArenaLive.spellDB = {
 				[89766] = "stun",			-- Axe Toss	(Pet-stun)
 				[22703] = "stun",			-- Infernal Awakening
 				[24259] = "silence",		-- Spell lock (Pet-silence)
+				[1119647] = "silence",		-- Spell lock (Pet-silence)
 				[115782] = "silence",		-- Optical Blast (Pet-silence)
 				[31117] = "silence",		-- Unstable Affliction (silence)
 				[111397] = "defCD", 	    -- Blood Horror (buff)
@@ -346,8 +347,7 @@ ArenaLive.spellDB = {
 				[23920] = "usefulBuffs",	-- Spell Reflection
 				[12292] = "usefulBuffs", 	-- Death Wish
 				[3411] = "usefulBuffs", 	-- Intervene
-				[25274] = "crowdControl", 	-- Intercept Stun
-				[5530] = "crowdControl", 	-- Mace Stun Effect
+				[25274] = "stun", 	-- Intercept Stun
 				[114206] = "usefulBuffs", -- Skull Banner
 				[118895] = "crowdControl", -- Dragon Roar
 				[20511] = "crowdControl", -- Intimidating Shout (targeted)
@@ -433,105 +433,257 @@ ArenaLive.spellDB = {
 			[72] = { 6552, 10 }, -- Shield Bash -> Pummel
 		},
 		["DiminishingReturns"] =
-		{						
-			-- Roots:
-			[339] = "root", 				-- Entangling Roots
-			[19975] = "root", 				-- Entangling Roots: Nature's Grasp
-			[53148] = "root",				-- Charge (Tenacity Pet)
-			[4167] = "root",  				-- Web 
-			[33395] =  "root",  			-- Freeze
-			[122] = "root",  				-- Frost Nova
+		{
 			
-			-- Short Roots:
-			[64803] = "shortRoot",			-- Entrapment (trap-roots)
-			
-			-- Stuns:
-			[22570] = "stun", 				-- Maim
-			[5211] = "stun", 				-- Mighty Bash
-			[9005] = "stun", 				-- Pounce	
-			
-			[19577] = "stun",				-- Intimidation (stun)			
-			
-			[853] = "stun",					-- Hammer of Justice
-			
-			[1833] = "stun", 				-- Cheap Shot
-			[408] = "stun", 				-- Kidney Shot
-			
-			[22703] = "stun",				-- Infernal Awakening
-			[30283] = "stun", 				-- Shadowfury
-			
-			[132168] = "stun", 				-- Shockwave
-			[107570] = "stun",				-- Storm Bolt
-			
-			[20549] = "stun", 				-- War Stomp
-			
-			-- Short Stuns:
-			
-			[77505] = "shortStun", 			-- Earthquake
-			
-			[7922] = "shortStun",			-- Charge Stun					
-	
-			-- Mesmerizes:
-			[2637] = "mesmerize",			-- Hibernate
-			
-			[3355] = "mesmerize", 			-- Freezing Trap
-			[19386] = "mesmerize", 			-- Wyvern Sting
-			
-			[118] = "mesmerize", 			-- Polymorph
-			
-			[115078] = "mesmerize", 		-- Paralysis
-			
-			[20066] = "mesmerize", 			-- Repentance
-			
-			[9484] = "mesmerize", 			-- Shackle Undead
-			
-			[1776] = "mesmerize", 			-- Gouge
-			[6770] = "mesmerize", 			-- Sap
-			
-			[710] = "mesmerize",			-- Banish
-			
-			-- Short Mesmerizes:
-			[99] = "shortMesmerize", 		-- Disorienting Roar
-			
-			[19503] = "shortMesmerize",		-- Scatter Shot
-			
-			[31661] = "shortMesmerize", 	-- Dragon's Breath
-			
-			[123407] = "shortMesmerize",	-- Glyph of Breath of Fire
-			
-			[88625] = "shortMesmerize",		-- Holy Word: Chastise
-			
-			-- Fears:
-			[113056] = "fear",				-- Intimidating Roar (cower)
-			[113004] = "fear",				-- Intimidating Roar (flee)
-			
-			[1513] = "fear", 				-- Scare Beast
-			
-			[105421] = "fear", 				-- Blinding Light
-			[10326] = "fear", 				-- Turn Evil
-			
-			[8122] = "fear", 				-- Psychic Scream
-			[113792] = "fear", 				-- Psychic Terror
-			
-			[2094] = "fear", 				-- Blind
-			
-			[118699] = "fear", 				-- Fear
-			[5484] = "fear", 				-- Howl of Terror
-			[115268] = "fear", 				-- Mesmerize
-			[6358] = "fear", 				-- Seduction
-			
-			[5246] = "fear",				-- Intimidating Shout
-			[20511] = "fear", 				-- Intimidating Shout
-			[95199] = "fear", 				-- Intimidating Shout
+			-- strict means the actual spell needs to match by ID, for specific cases
 
-			-- Horrors:
-			[6789] = "horror", 				-- Mortal Coil
-		
-			-- Cyclone:
-			[33786] = "cyclone", -- Cyclone
-			
-			-- Charms:
-			[605] = "charm", -- Dominate Mind
+			[49203] = { type = "incapacitate" }, -- Hungering Cold
+			[2637]  = { type = "incapacitate" }, -- Hibernate (Rank 1)
+			[18657] = { type = "incapacitate" }, -- Hibernate (Rank 2)
+			[18658] = { type = "incapacitate" }, -- Hibernate (Rank 3)
+			[60210] = { type = "incapacitate" }, -- Freezing Arrow Effect (Rank 1)
+			[3355]  = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 1)
+			[14308] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 2)
+			[14309] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 3)
+			[19386] = { type = "incapacitate" }, -- Wyvern Sting (Rank 1)
+			[24132] = { type = "incapacitate" }, -- Wyvern Sting (Rank 2)
+			[24133] = { type = "incapacitate" }, -- Wyvern Sting (Rank 3)
+			[27068] = { type = "incapacitate" }, -- Wyvern Sting (Rank 4)
+			[49011] = { type = "incapacitate" }, -- Wyvern Sting (Rank 5)
+			[49012] = { type = "incapacitate" }, -- Wyvern Sting (Rank 6)
+			[118]   = { type = "incapacitate" }, -- Polymorph (Rank 1)
+			[12824] = { type = "incapacitate" }, -- Polymorph (Rank 2)
+			[12825] = { type = "incapacitate" }, -- Polymorph (Rank 3)
+			[12826] = { type = "incapacitate" }, -- Polymorph (Rank 4)
+			[28271] = { type = "incapacitate" }, -- Polymorph: Turtle
+			[28272] = { type = "incapacitate" }, -- Polymorph: Pig
+			[61721] = { type = "incapacitate" }, -- Polymorph: Rabbit
+			[61780] = { type = "incapacitate" }, -- Polymorph: Turkey
+			[61305] = { type = "incapacitate" }, -- Polymorph: Black Cat
+			[20066] = { type = "incapacitate" }, -- Repentance
+			[1776]  = { type = "incapacitate" }, -- Gouge
+			[6770]  = { type = "incapacitate" }, -- Sap (Rank 1)
+			[2070]  = { type = "incapacitate" }, -- Sap (Rank 2)
+			[11297] = { type = "incapacitate" }, -- Sap (Rank 3)
+			[51724] = { type = "incapacitate" }, -- Sap (Rank 4)
+			[710]   = { type = "incapacitate" }, -- Banish (Rank 1)
+			[18647] = { type = "incapacitate" }, -- Banish (Rank 2)
+			[9484]  = { type = "incapacitate" }, -- Shackle Undead (Rank 1)
+			[9485]  = { type = "incapacitate" }, -- Shackle Undead (Rank 2)
+			[10955] = { type = "incapacitate" }, -- Shackle Undead (Rank 3)
+			[51514] = { type = "incapacitate" }, -- Hex
+			[13327] = { type = "incapacitate" }, -- Reckless Charge (Rocket Helmet)
+			[4064]  = { type = "incapacitate" }, -- Rough Copper Bomb
+			[4065]  = { type = "incapacitate" }, -- Large Copper Bomb
+			[4066]  = { type = "incapacitate" }, -- Small Bronze Bomb
+			[4067]  = { type = "incapacitate" }, -- Big Bronze Bomb
+			[4068]  = { type = "incapacitate" }, -- Iron Grenade
+			[12421] = { type = "incapacitate" }, -- Mithril Frag Bomb
+			[4069]  = { type = "incapacitate" }, -- Big Iron Bomb
+			[12562] = { type = "incapacitate" }, -- The Big One
+			[12543] = { type = "incapacitate" }, -- Hi-Explosive Bomb
+			[19769] = { type = "incapacitate" }, -- Thorium Grenade
+			[19784] = { type = "incapacitate" }, -- Dark Iron Bomb
+			[30216] = { type = "incapacitate" }, -- Fel Iron Bomb
+			[30461] = { type = "incapacitate" }, -- The Bigger One
+			[30217] = { type = "incapacitate" }, -- Adamantite Grenade
+			[67769] = { type = "incapacitate" }, -- Cobalt Frag Bomb
+			[67890] = { type = "incapacitate" }, -- Cobalt Frag Bomb (Frag Belt)
+			[54466] = { type = "incapacitate" }, -- Saronite Grenade
+
+			[47481] = { type = "stun" }, -- Gnaw (Ghoul Pet)
+			[5211]  = { type = "stun" }, -- Bash (Rank 1)
+			[6798]  = { type = "stun" }, -- Bash (Rank 2)
+			[8983]  = { type = "stun" }, -- Bash (Rank 3)
+			[22570] = { type = "stun" }, -- Maim (Rank 1)
+			[49802] = { type = "stun" }, -- Maim (Rank 2)
+			[24394] = { type = "stun" }, -- Intimidation
+			[50519] = { type = "stun" }, -- Sonic Blast (Pet Rank 1)
+			[53564] = { type = "stun" }, -- Sonic Blast (Pet Rank 2)
+			[53565] = { type = "stun" }, -- Sonic Blast (Pet Rank 3)
+			[53566] = { type = "stun" }, -- Sonic Blast (Pet Rank 4)
+			[53567] = { type = "stun" }, -- Sonic Blast (Pet Rank 5)
+			[53568] = { type = "stun" }, -- Sonic Blast (Pet Rank 6)
+			[50518] = { type = "stun" }, -- Ravage (Pet Rank 1)
+			[53558] = { type = "stun" }, -- Ravage (Pet Rank 2)
+			[53559] = { type = "stun" }, -- Ravage (Pet Rank 3)
+			[53560] = { type = "stun" }, -- Ravage (Pet Rank 4)
+			[53561] = { type = "stun" }, -- Ravage (Pet Rank 5)
+			[53562] = { type = "stun" }, -- Ravage (Pet Rank 6)
+			[44572] = { type = "stun" }, -- Deep Freeze
+			[853]   = { type = "stun" }, -- Hammer of Justice (Rank 1)
+			[5588]  = { type = "stun" }, -- Hammer of Justice (Rank 2)
+			[5589]  = { type = "stun" }, -- Hammer of Justice (Rank 3)
+			[10308] = { type = "stun" }, -- Hammer of Justice (Rank 4)
+			[2812]  = { type = "stun" }, -- Holy Wrath (Rank 1)
+			[10318] = { type = "stun" }, -- Holy Wrath (Rank 2)
+			[27139] = { type = "stun" }, -- Holy Wrath (Rank 3)
+			[48816] = { type = "stun" }, -- Holy Wrath (Rank 4)
+			[48817] = { type = "stun" }, -- Holy Wrath (Rank 5)
+			[408]   = { type = "stun" }, -- Kidney Shot (Rank 1)
+			[8643]  = { type = "stun" }, -- Kidney Shot (Rank 2)
+			[58861] = { type = "stun" }, -- Bash (Spirit Wolves)
+			[30283] = { type = "stun" }, -- Shadowfury (Rank 1)
+			[30413] = { type = "stun" }, -- Shadowfury (Rank 2)
+			[30414] = { type = "stun" }, -- Shadowfury (Rank 3)
+			[47846] = { type = "stun" }, -- Shadowfury (Rank 4)
+			[47847] = { type = "stun" }, -- Shadowfury (Rank 5)
+			[12809] = { type = "stun" }, -- Concussion Blow
+			[60995] = { type = "stun" }, -- Demon Charge
+			[30153] = { type = "stun" }, -- Intercept (Felguard Rank 1)
+			[30195] = { type = "stun" }, -- Intercept (Felguard Rank 2)
+			[30197] = { type = "stun" }, -- Intercept (Felguard Rank 3)
+			[47995] = { type = "stun" }, -- Intercept (Felguard Rank 4)
+			[20253] = { type = "stun" }, -- Intercept Stun (Rank 1)
+			[20614] = { type = "stun" }, -- Intercept Stun (Rank 2)
+			[20615] = { type = "stun" }, -- Intercept Stun (Rank 3)
+			[25273] = { type = "stun" }, -- Intercept Stun (Rank 4)
+			[25274] = { type = "stun" }, -- Intercept Stun (Rank 5)
+			[46968] = { type = "stun" }, -- Shockwave
+			[20549] = { type = "stun" }, -- War Stomp (Racial)
+
+
+			[16922]   = { type = "random_stun" },  -- Celestial Focus (Starfire Stun)
+			[28445]   = { type = "random_stun" },  -- Improved Concussive Shot
+			[12355]   = { type = "random_stun" },  -- Impact
+			[20170]   = { type = "random_stun" },  -- Seal of Justice Stun
+			[39796]   = { type = "random_stun" },  -- Stoneclaw Stun
+			[12798]   = { type = "random_stun" },  -- Revenge Stun
+			[5530]    = { type = "random_stun" },  -- Mace Stun Effect (Mace Specialization)
+			[15283]   = { type = "random_stun" },  -- Stunning Blow (Weapon Proc)
+			[56]      = { type = "random_stun" },  -- Stun (Weapon Proc)
+			[34510]   = { type = "random_stun" },  -- Stormherald/Deep Thunder (Weapon Proc)
+			[1572740] = { type = "random_stun" },  -- Stormbolt
+
+			[1513]  = { type = "fear" }, -- Scare Beast (Rank 1)
+			[14326] = { type = "fear" }, -- Scare Beast (Rank 2)
+			[14327] = { type = "fear" }, -- Scare Beast (Rank 3)
+			[10326] = { type = "fear" }, -- Turn Evil
+			[8122]  = { type = "fear" }, -- Psychic Scream (Rank 1)
+			[8124]  = { type = "fear" }, -- Psychic Scream (Rank 2)
+			[10888] = { type = "fear" }, -- Psychic Scream (Rank 3)
+			[10890] = { type = "fear" }, -- Psychic Scream (Rank 4)
+			[2094]  = { type = "fear" }, -- Blind
+			[5782]  = { type = "fear" }, -- Fear (Rank 1)
+			[6213]  = { type = "fear" }, -- Fear (Rank 2)
+			[6215]  = { type = "fear" }, -- Fear (Rank 3)
+			[6358]  = { type = "fear" }, -- Seduction (Succubus)
+			[5484]  = { type = "fear" }, -- Howl of Terror (Rank 1)
+			[17928] = { type = "fear" }, -- Howl of Terror (Rank 2)
+			[5246]  = { type = "fear" }, -- Intimidating Shout
+			[5134]  = { type = "fear" }, -- Flash Bomb Fear (Item)
+
+			[339]   = { type = "root" }, -- Entangling Roots (Rank 1)
+			[1062]  = { type = "root" }, -- Entangling Roots (Rank 2)
+			[5195]  = { type = "root" }, -- Entangling Roots (Rank 3)
+			[5196]  = { type = "root" }, -- Entangling Roots (Rank 4)
+			[9852]  = { type = "root" }, -- Entangling Roots (Rank 5)
+			[9853]  = { type = "root" }, -- Entangling Roots (Rank 6)
+			[26989] = { type = "root" }, -- Entangling Roots (Rank 7)
+			[53308] = { type = "root" }, -- Entangling Roots (Rank 8)
+			[65857] = { type = "root" }, -- Entangling Roots (Rank 8) (TODO: Not sure which ID is correct)
+			[19975] = { type = "root" }, -- Nature's Grasp (Rank 1)
+			[19974] = { type = "root" }, -- Nature's Grasp (Rank 2)
+			[19973] = { type = "root" }, -- Nature's Grasp (Rank 3)
+			[19972] = { type = "root" }, -- Nature's Grasp (Rank 4)
+			[19971] = { type = "root" }, -- Nature's Grasp (Rank 5)
+			[19970] = { type = "root" }, -- Nature's Grasp (Rank 6)
+			[27010] = { type = "root" }, -- Nature's Grasp (Rank 7)
+			[53313] = { type = "root" }, -- Nature's Grasp (Rank 8)
+			[66070] = { type = "root" }, -- Nature's Grasp (Rank 8) (TODO: Not sure which ID is correct)
+			[50245] = { type = "root" }, -- Pin (Rank 1)
+			[53544] = { type = "root" }, -- Pin (Rank 2)
+			[53545] = { type = "root" }, -- Pin (Rank 3)
+			[53546] = { type = "root" }, -- Pin (Rank 4)
+			[53547] = { type = "root" }, -- Pin (Rank 5)
+			[53548] = { type = "root" }, -- Pin (Rank 6)
+			[33395] = { type = "root" }, -- Freeze (Water Elemental)
+			[122]   = { type = "root" }, -- Frost Nova (Rank 1)
+			[865]   = { type = "root" }, -- Frost Nova (Rank 2)
+			[6131]  = { type = "root" }, -- Frost Nova (Rank 3)
+			[10230] = { type = "root" }, -- Frost Nova (Rank 4)
+			[27088] = { type = "root" }, -- Frost Nova (Rank 5)
+			[42917] = { type = "root" }, -- Frost Nova (Rank 6)
+			[64695] = { type = "root" }, -- Earthgrab
+			[39965] = { type = "root" }, -- Frost Grenade (Item)
+			[63685] = { type = "root" }, -- Freeze (Frost Shock)
+			[55536] = { type = "root" }, -- Frostweave Net (Item)
+
+			[12494] = { type = "random_root" },         -- Frostbite
+			[55080] = { type = "random_root" },         -- Shattered Barrier
+			[58373] = { type = "random_root" },         -- Glyph of Hamstring
+			[23694] = { type = "random_root" },         -- Improved Hamstring
+			[47168] = { type = "random_root" },         -- Improved Wing Clip
+			[19185] = { type = "random_root" },         -- Entrapment
+
+			[53359] = { type = "disarm" }, -- Chimera Shot (Scorpid)
+			[50541] = { type = "disarm" }, -- Snatch (Rank 1)
+			[53537] = { type = "disarm" }, -- Snatch (Rank 2)
+			[53538] = { type = "disarm" }, -- Snatch (Rank 3)
+			[53540] = { type = "disarm" }, -- Snatch (Rank 4)
+			[53542] = { type = "disarm" }, -- Snatch (Rank 5)
+			[53543] = { type = "disarm" }, -- Snatch (Rank 6)
+			[64346] = { type = "disarm" }, -- Fiery Payback
+			[64058] = { type = "disarm" }, -- Psychic Horror Disarm Effect
+			[51722] = { type = "disarm" }, -- Dismantle
+			[676]   = { type = "disarm" }, -- Disarm
+
+			[47476] = { type = "silence" }, -- Strangulate
+			[34490] = { type = "silence" }, -- Silencing Shot
+			[35334] = { type = "silence" }, -- Nether Shock 1 -- TODO: verify
+			[44957] = { type = "silence" }, -- Nether Shock 2 -- TODO: verify
+			[18469] = { type = "silence" }, -- Silenced - Improved Counterspell (Rank 1)
+			[55021] = { type = "silence" }, -- Silenced - Improved Counterspell (Rank 2)
+			[63529] = { type = "silence" }, -- Silenced - Shield of the Templar
+			[15487] = { type = "silence" }, -- Silence
+			[1330]  = { type = "silence" }, -- Garrote - Silence
+			[18425] = { type = "silence" }, -- Silenced - Improved Kick
+			[24259] = { type = "silence" }, -- Spell Lock
+			[1119647] = { type = "silence" }, -- Spell Lock
+			[1131117] = { type = "silence", strict = true }, -- Unstable Affliction (Ascension)
+			[31117] = { type = "silence", strict = true }, -- Unstable Affliction 2
+			[18498] = { type = "silence" }, -- Silenced - Gag Order (Shield Slam)
+			[74347] = { type = "silence" }, -- Silenced - Gag Order (Heroic Throw?)
+			[50613] = { type = "silence" }, -- Arcane Torrent (Racial, Runic Power)
+			[28730] = { type = "silence" }, -- Arcane Torrent (Racial, Mana)
+			[25046] = { type = "silence" }, -- Arcane Torrent (Racial, Energy)
+
+			[64044] = { type = "horror" }, -- Psychic Horror
+			[6789]  = { type = "horror" }, -- Death Coil (Rank 1)
+			[17925] = { type = "horror" }, -- Death Coil (Rank 2)
+			[17926] = { type = "horror" }, -- Death Coil (Rank 3)
+			[27223] = { type = "horror" }, -- Death Coil (Rank 4)
+			[47859] = { type = "horror" }, -- Death Coil (Rank 5)
+			[47860] = { type = "horror" }, -- Death Coil (Rank 6)
+
+			[1833]  = { type = "opener_stun" }, -- Cheap Shot
+			[9005]  = { type = "opener_stun" }, -- Pounce (Rank 1)
+			[9823]  = { type = "opener_stun" }, -- Pounce (Rank 2)
+			[9827]  = { type = "opener_stun" }, -- Pounce (Rank 3)
+			[27006] = { type = "opener_stun" }, -- Pounce (Rank 4)
+			[49803] = { type = "opener_stun" }, -- Pounce (Rank 5)
+
+			[31661] = { type = "scatter" }, -- Dragon's Breath (Rank 1)
+			[33041] = { type = "scatter" }, -- Dragon's Breath (Rank 2)
+			[33042] = { type = "scatter" }, -- Dragon's Breath (Rank 3)
+			[33043] = { type = "scatter" }, -- Dragon's Breath (Rank 4)
+			[42949] = { type = "scatter" }, -- Dragon's Breath (Rank 5)
+			[42950] = { type = "scatter" }, -- Dragon's Breath (Rank 6)
+			[19503] = { type = "scatter" }, -- Scatter Shot
+
+			-- Spells that DR with itself only
+			[33786] = { type = "cyclone" },        -- Cyclone
+			[605]   = { type = "mind_control" },   -- Mind Control
+			[13181] = { type = "mind_control" },   -- Gnomish Mind Control Cap
+			[67799] = { type = "mind_control" },   -- Mind Amplification Dish
+			[7922]  = { type = "charge" },         -- Charge Stun
+			[19306] = { type = "counterattack" },  -- Counterattack 1
+			[20909] = { type = "counterattack" },  -- Counterattack 2
+			[20910] = { type = "counterattack" },  -- Counterattack 3
+			[27067] = { type = "counterattack" },  -- Counterattack 4
+			[48998] = { type = "counterattack" },  -- Counterattack 5
+			[48999] = { type = "counterattack" },  -- Counterattack 6
+
 			
 		},
 	};

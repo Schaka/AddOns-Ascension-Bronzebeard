@@ -47,10 +47,14 @@ DRTracker.elapsed = 0;
 local THROTTLE_INTERVAL = 0.1;
 
 local locSpells = {};
-for spellID,type in pairs(ArenaLive.spellDB["DiminishingReturns"]) do
+for spellID, content in pairs(ArenaLive.spellDB["DiminishingReturns"]) do
 	local name = GetSpellInfo(spellID)
 	if name then
-		locSpells[name] = type
+		local drContent = {}
+		drContent.type = content.type
+		drContent.spellID = spellID
+		drContent.strict = content.strict
+		locSpells[name] = drContent
 	end
 end
 
@@ -377,8 +381,14 @@ end
 function DRTracker:UpdateDiminishingReturn(guid, spellID)
 
 	local spellName = GetSpellInfo(spellID)
-	local drType = locSpells[spellName]
-	--local drType = ArenaLive.spellDB.DiminishingReturns[spellID];
+	local drInfo = locSpells[spellName]
+	local drType = drInfo.type
+
+	local drById = ArenaLive.spellDB.DiminishingReturns[spellID];
+	if ( drInfo.strict and not drById ) then
+		return;
+	end	
+
 	local drVarType = type(drType);
 	if ( drVarType == "string" ) then
 		DRTracker:SetDiminishingReturn(guid, spellID, drType);
@@ -498,7 +508,7 @@ function DRTracker:OnEvent(event, ...)
 		if ( not locSpells[spellName] or destGUID == sourceGUID ) then
 			return;
 		end
-		
+
 		if ( event == "COMBAT_LOG_EVENT_UNFILTERED_SPELL_AURA_APPLIED" or event == "COMBAT_LOG_EVENT_UNFILTERED_SPELL_AURA_REFRESH" ) then
 			DRTracker:UpdateDiminishingReturn(destGUID, spellID);
 		elseif ( event == "COMBAT_LOG_EVENT_UNFILTERED_SPELL_AURA_REMOVED" ) then
