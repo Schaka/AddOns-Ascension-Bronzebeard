@@ -1706,7 +1706,7 @@ end
 function BigDebuffs:UNIT_AURA(unit)
 
     if not self.db.profile.unitFrames.enabled or
-        self.db.profile.unitFrames[unit:gsub("%d", "")] and not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled
+        (self.db.profile.unitFrames[unit:gsub("%d", "")] and not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled)
     then
         return
     elseif (GetNumGroupMembers() > 5 and unit:match("party")) then
@@ -1718,6 +1718,8 @@ function BigDebuffs:UNIT_AURA(unit)
             return
         end
     end
+
+    if unit:find("nameplate") then return end
 
     self:AttachUnitFrame(unit)
 
