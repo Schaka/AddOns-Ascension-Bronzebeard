@@ -4,6 +4,16 @@ local addonName, addon = ...
 
 BigDebuffs = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceEvent-3.0", "AceHook-3.0")
 
+local spellNameCache = {}
+local function GetSpellName(id)
+    if spellNameCache[id] then
+        return spellNameCache[id]
+    end    
+    local name = GetSpellInfo(id)
+    spellNameCache[id] = name
+    return name
+end
+
 -- Defaults
 local defaults = {
     profile = {
@@ -158,18 +168,48 @@ BigDebuffs.WarningDebuffs = addon.WarningDebuffs or {}
 BigDebuffs.Spells = addon.Spells
 BigDebuffs.SpellNames = {}
 for id, options in pairs(addon.Spells) do
-    local spellName = GetSpellInfo(id)
-    if spellName and options.type then -- skip children, we don't need to kind of logic if we go by spell names anyway
+    local spellName = GetSpellName(id)
+
+    if spellName and options.type then
+
+        if not BigDebuffs.SpellNames[spellName] then
+            BigDebuffs.SpellNames[spellName] = {}
+        end
+
         local newOptions = {}
         newOptions.type = options.type
+        newOptions.strict = options.strict
         newOptions.duration = options.duration
+        newOptions.spellId = options.id
         newOptions.nounitFrames = options.nounitFrames
         if options.parent then
-            newOptions.parent = GetSpellInfo(options.parent)
+            newOptions.parent = GetSpellName(options.parent)
+            newOptions.parentId = options.parent
         end
-        BigDebuffs.SpellNames[spellName] = newOptions
+
+        BigDebuffs.SpellNames[spellName][id] = newOptions
     end    
-end    
+end
+
+function getSpellData(spellName, id)
+    local spellsWithName = BigDebuffs.SpellNames[spellName]
+    if not spellsWithName then return end
+    local spellMatch = nil
+
+    for spellId, spellInfo in pairs(spellsWithName) do
+        if spellId == id then
+            return spellInfo.parentId and spellsWithName[spellInfo.parentId] or spellInfo
+        end
+
+        if not spellInfo.strict then
+            -- if we're matching by name, parents don't matter
+            -- however, we always need to iterate all entries too at least guarantee we couldn't match by ID
+            spellMatch = spellInfo
+        end    
+    end
+
+    return spellMatch
+end
 
 defaults.profile.unitFrames.focus = {
     enabled = true,
@@ -781,6 +821,7 @@ function BigDebuffs:AttachUnitFrame(unit)
     frame.blizzard = nil
 
     local config = self.db.profile.unitFrames[unit:gsub("%d", "")]
+    if not config then return end
 
     if config.anchor == "auto" then
         -- Find a frame to attach to
@@ -968,7 +1009,7 @@ end
 local TestDebuffs = {}
 
 local function InsertTestDebuff(spellID, dispelType)
-    local texture = GetSpellTexture(spellID)
+    local texture = C_Spell.GetSpellTexture(spellID)
     table.insert(TestDebuffs, { spellID, texture, 0, dispelType })
 end
 
@@ -976,7 +1017,8 @@ local function UnitDebuffTest(unit, index)
     local debuff = TestDebuffs[index]
     if not debuff then return end
     -- name, icon, count, debuffType, duration, expirationTime, unitCaster, canStealOrPurge, _, spellId
-    return "Test", debuff[2], 0, debuff[4], 60, GetTime() + 60, nil, nil, nil, debuff[1]
+    -- name, rank, icon, count, debuffType, duration, expirationTime, unitCaster, _, _, spellId
+    return GetSpellName(debuff[1]), nil, debuff[2], 0, debuff[4], 60, GetTime() + 60, nil, nil, nil, debuff[1]
 end
 
 function BigDebuffs:OnEnable()
@@ -1000,11 +1042,8 @@ function BigDebuffs:OnEnable()
     InsertTestDebuff(408, nil) -- Kidney Shot
     InsertTestDebuff(1766, nil) -- Kick
 
-    if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
-        InsertTestDebuff(51514, "Curse") -- Hex
-        InsertTestDebuff(316099, "Magic") -- Unstable Affliction
-        InsertTestDebuff(208086, nil) -- Colossus Smash
-    end
+    InsertTestDebuff(51514, "Curse") -- Hex
+    InsertTestDebuff(316099, "Magic") -- Unstable Affliction
 
     InsertTestDebuff(339, "Magic") -- Entangling Roots
     InsertTestDebuff(589, "Magic") -- Shadow Word: Pain
@@ -1014,22 +1053,15 @@ function BigDebuffs:OnEnable()
     InsertTestDebuff(772, nil) -- Rend
 end
 
-local function UnitBuffByName(unit, name)
-    for i = 1, 40 do
-        local n = UnitBuff(unit, i)
-        if n == name then return true end
-    end
-end
-
 function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(Self, ...)
     local _, event, _, _, _, _, _, destGUID, _, _, _, spellId, spellName = CombatLogGetCurrentEventInfo(...)
 
     -- SPELL_INTERRUPT doesn't fire for some channeled spells
     if event ~= "SPELL_INTERRUPT" and event ~= "SPELL_CAST_SUCCESS" then return end
 
-    local spell = self.Spells[spellId]
+    local spell = getSpellData(spellName, spellId)
     if not spell then return end
-    local spellType = spell.parent and self.Spells[spell.parent].type or spell.type
+    local spellType = spell.type
     if spellType ~= "interrupts" then return end
 
     -- Find unit
@@ -1254,52 +1286,50 @@ end
 
 -- For unit frames
 function BigDebuffs:GetAuraPriority(spellName, id)
-    if not self.SpellNames[spellName] then return end
-    spellName = self.SpellNames[spellName].parent or spellName -- Check for parent spellID
+    
+    local spellInfo = getSpellData(spellName, id)
+    id = spellInfo.spellId
 
     -- Make sure category is enabled
-    if not self.db.profile.unitFrames[self.SpellNames[spellName].type] then return end
+    if not self.db.profile.unitFrames[spellInfo.type] then return end
 
-    --[[ FIXME
     -- Check for user set
     if self.db.profile.spells[id] then
         if self.db.profile.spells[id].unitFrames and self.db.profile.spells[id].unitFrames == 0 then return end
         if self.db.profile.spells[id].priority then return self.db.profile.spells[id].priority end
     end
-    --]]
 
-    if self.SpellNames[spellName].nounitFrames and
+    if spellInfo.nounitFrames and
         (not self.db.profile.spells[id] or not self.db.profile.spells[id].unitFrames)
     then
         return
     end
 
-    return self.db.profile.priority[self.SpellNames[spellName].type] or 0
+    return self.db.profile.priority[spellInfo.type] or 0
 end
 
 -- For nameplates
 function BigDebuffs:GetNameplatesPriority(spellName, id)
-    if not self.SpellNames[spellName] then return end
-    id = self.SpellNames[spellName].parent or spellName -- Check for parent spellID
+
+    local spellInfo = getSpellData(spellName, id)
+    id = spellInfo.spellId
 
     -- Make sure category is enabled
-    if not self.db.profile.nameplates[self.SpellNames[spellName].type] then return end
+    if not self.db.profile.nameplates[spellInfo.type] then return end
 
-    --[[ FIXME
     -- Check for user set
     if self.db.profile.spells[id] then
         if self.db.profile.spells[id].nameplates and self.db.profile.spells[id].nameplates == 0 then return end
         if self.db.profile.spells[id].priority then return self.db.profile.spells[id].priority end
     end
-    ]]
 
-    if self.SpellNames[spellName].nonameplates and
+    if spellInfo.nonameplates and
         (not self.db.profile.spells[id] or not self.db.profile.spells[id].nameplates)
     then
         return
     end
 
-    return self.db.profile.priority[self.SpellNames[spellName].type] or 0
+    return self.db.profile.priority[spellInfo.type] or 0
 end
 
 --classic and BigDebuffs:ShowBigDebuffs()
@@ -1315,7 +1345,7 @@ local CompactUnitFrame_UtilSetDebuff = function(debuffFrame, unit, index, filter
         -- it's an interrupt
         local spell = BigDebuffs.units[UnitGUID(unit)]
         spellId = spell.spellId
-        icon = GetSpellTexture(spellId)
+        icon = C_Spell.GetSpellTexture(spellId)
         count = 1
         duration = spell.duration
         expirationTime = spell.expires
@@ -1676,7 +1706,7 @@ end
 function BigDebuffs:UNIT_AURA(unit)
 
     if not self.db.profile.unitFrames.enabled or
-        not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled
+        self.db.profile.unitFrames[unit:gsub("%d", "")] and not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled
     then
         return
     elseif (GetNumGroupMembers() > 5 and unit:match("party")) then
@@ -1703,7 +1733,8 @@ function BigDebuffs:UNIT_AURA(unit)
         -- Check debuffs
         local name, _, n, _, _, d, e, caster, _, _, id = UnitDebuff(unit, i)
         if id then
-            if self.SpellNames[name] then
+            local spellInfo = getSpellData(name, id)
+            if spellInfo then
                 local reaction = caster and UnitReaction("player", caster) or 0
                 local friendlySmokeBomb = id == 212183 and reaction > 4
                 local p = self:GetAuraPriority(name, id)
@@ -1723,7 +1754,8 @@ function BigDebuffs:UNIT_AURA(unit)
         -- Check buffs
         name, _, n, _, _, d, e, caster, _, _, id = UnitBuff(unit, i)
         if id then
-            if self.SpellNames[name] then
+           local spellInfo = getSpellData(name, id)
+            if spellInfo then
                 local p = self:GetAuraPriority(name, id)
                 if p and p >= priority then
                     if p > priority or self:IsPriorityBigDebuff(id) or e == 0 or e - now > left then
@@ -1745,15 +1777,16 @@ function BigDebuffs:UNIT_AURA(unit)
     if guid and self.units[guid] and self.units[guid].expires and self.units[guid].expires > now then
         local spell = self.units[guid]
         local spellId = spell.spellId
-        local spellName= GetSpellInfo(spell.spellId)
+        local spellName = GetSpellName(spellId)
+        local spellInfo = getSpellData(spellName, spellId)
         local p = self:GetAuraPriority(spellName, spellId)
         if p and p >= priority then
             left = spell.expires - now
-            duration = self.Spells[spellId].duration
-            debuff = spellId
+            duration = spellInfo.duration
+            debuff = spellInfo.spellId
             expires = spell.expires
-            icon = GetSpellTexture(spellId)
-            interrupt = spellId
+            icon = C_Spell.GetSpellTexture(spellInfo.spellId)
+            interrupt = spellInfo.spellId
         end
     end
 
@@ -1808,7 +1841,8 @@ function BigDebuffs:UNIT_AURA_NAMEPLATE(unit)
         -- Check debuffs
         local name, _, n, _, _, d, e, caster, _, _, id = UnitDebuff(unit, i)
         if name then
-            if self.SpellNames[name] then
+            local spellInfo = getSpellData(name, id)
+            if spellInfo then
                 local reaction = caster and UnitReaction("player", caster) or 0
                 local friendlySmokeBomb = id == 212183 and reaction > 4
                 local p = self:GetNameplatesPriority(name, id)
@@ -1829,7 +1863,8 @@ function BigDebuffs:UNIT_AURA_NAMEPLATE(unit)
     
         name, _, n, _, _, d, e, caster, _, _, id = UnitBuff(unit, i)
         if name then
-            if self.SpellNames[name] then
+            local spellInfo = getSpellData(name, id)
+            if spellInfo then
                 local p = self:GetNameplatesPriority(name, id)
                 if p and p >= priority then
                     if p > priority or self:IsPriorityBigDebuff(id) or e == 0 or e - now > left then
@@ -1851,15 +1886,16 @@ function BigDebuffs:UNIT_AURA_NAMEPLATE(unit)
     if guid and self.units[guid] and self.units[guid].expires and self.units[guid].expires > GetTime() then
         local spell = self.units[guid]
         local spellId = spell.spellId
-        local spellName = GetSpellInfo(spell.spellId)
+        local spellName = GetSpellName(spellId)
+        local spellInfo = getSpellData(spellName, spellId)
         local p = self:GetNameplatesPriority(spellName, spellId)
         if p and p >= priority then
             left = spell.expires - now
-            duration = self.Spells[spellId].duration
-            debuff = spellId
+            duration = spellInfo.duration
+            debuff = spellInfo.spellId
             expires = spell.expires
-            icon = GetSpellTexture(spellId)
-            interrupt = spellId
+            icon = C_Spell.GetSpellTexture(spellId)
+            interrupt = spellInfo.spellId
         end
     end
 

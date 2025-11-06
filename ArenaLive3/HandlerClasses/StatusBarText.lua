@@ -7,6 +7,7 @@ This file contains all relevant functions for status bar text handlers.
 
 -- ArenaLive addon Name and localisation table:
 local addonName, L = ...;
+local LARGE_NUMBER_SEPERATOR = "," -- should be . for some languages
 
 --[[
 **************************************************

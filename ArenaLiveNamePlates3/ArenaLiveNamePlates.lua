@@ -432,6 +432,7 @@ function NamePlate:OnEvent(event, ...)
 		if not unitFrame then return end
 
 		local namePlate = self.namePlates[unitFrame];
+		if not namePlate then return end
 		namePlate:UpdateCastBar();
 
     elseif (event == "ADDON_LOADED" ) then

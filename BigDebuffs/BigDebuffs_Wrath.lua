@@ -146,12 +146,10 @@ addon.Spells = {
 
     [15752] = { type = INTERRUPT, duration = 10 }, -- Linken's Boomerang Disarm
     [1119244] = { type = INTERRUPT, duration = 5 }, -- Spell Lock - Rank 1 (Ascension)
-        [1119647] = { parent = 19244, duration = 6 }, -- Spell Lock - Rank 2 (Ascension)
-    [19244] = { type = INTERRUPT, duration = 5 }, -- Spell Lock - Rank 1 (Warlock)
-        [19647] = { parent = 19244, duration = 6 }, -- Spell Lock - Rank 2 (Warlock)
+        [1119647] = { parent = 1119244, duration = 6 }, -- Spell Lock - Rank 2 (Ascension)
     [13491] = { type = INTERRUPT, duration = 5 }, -- Iron Knuckles
     [16979] = { type = INTERRUPT, duration = 4 }, -- Feral Charge (Druid)
-    [2139] = { type = INTERRUPT, duration = 8 }, -- Counterspell (Mage)
+    [1102139] = { type = INTERRUPT, duration = 8 }, -- Counterspell (Mage)
     [1766] = { type = INTERRUPT, duration = 5 }, -- Kick (Rogue)
         [1767] = { parent = 1766 },
         [1768] = { parent = 1766 },
@@ -173,18 +171,13 @@ addon.Spells = {
     [20711] = { type = BUFF_DEFENSIVE, },  -- Spirit of Redemption
     [47585] = { type = IMMUNITY, },  -- Dispersion
     [47788] = { type = BUFF_DEFENSIVE, },  -- Guardian Spirit
-    [48066] = { type = BUFF_OTHER, }, -- Power Word: Shield
     [64044] = { type = CROWD_CONTROL, }, -- Psychic Horror (Horrify)
     [64058] = { type = CROWD_CONTROL, }, -- Psychic Horror (Disarm)
     [64843] = { type = BUFF_DEFENSIVE, },  -- Divine Hymn
     [64901] = { type = BUFF_DEFENSIVE, }, -- Hymn of Hope
 
     [17] = { type = BUFF_DEFENSIVE }, -- Power Word: Shield
-    [453] = { type = BUFF_OTHER }, -- Mind Soothe
-        [8192] = { parent = 453 },
-        [10953] = { parent = 453 },
-        [25596] = { parent = 453 },
-    [592] = { parent = 17 }, -- Power Word: Shield
+        [592] = { parent = 17 }, -- Power Word: Shield
         [600] = { parent = 17 },
         [3747] = { parent = 17 },
         [6065] = { parent = 17 },
@@ -193,6 +186,7 @@ addon.Spells = {
         [10899] = { parent = 17 },
         [10900] = { parent = 17 },
         [10901] = { parent = 17 },
+        [1110901] = { parent = 17 },
     [605] = { type = CROWD_CONTROL }, -- Mind Control
         [10911] = { parent = 605 },
         [10912] = { parent = 605 },
@@ -202,7 +196,6 @@ addon.Spells = {
         [10890] = { parent = 8122 },
     [10060] = { type = BUFF_OFFENSIVE }, -- Power Infusion
     [15487] = { type = CROWD_CONTROL }, -- Silence
-    [14892] = { type = BUFF_DEFENSIVE }, -- Inspiration
         [15362] = { parent = 14892 },
         [15363] = { parent = 14892 },
     [6346] = { type = BUFF_DEFENSIVE }, -- Fear Ward
@@ -252,7 +245,6 @@ addon.Spells = {
         [19441] = { parent = 7812 },
         [19442] = { parent = 7812 },
         [19443] = { parent = 7812 },
-    [18093] = { type = CROWD_CONTROL }, -- Pyroclasm
     [18223] = { type = ROOT }, -- Curse of Exhaustion
         [18310] = { parent = 18223 },
         [18313] = { parent = 18223 },
@@ -296,7 +288,7 @@ addon.Spells = {
     -- Shaman
 
     -- WoTLK
-    [2825] = { type = BUFF_OFFENSIVE },  -- Bloodlust
+    [1102825] = { type = BUFF_OFFENSIVE },  -- Bloodlust
     [16191] = { type = BUFF_OFFENSIVE }, -- Mana Tide Totem
     [32182] = { type = BUFF_OFFENSIVE },  -- Heroism
     [51514] = { type = CROWD_CONTROL, },  -- Hex
@@ -482,7 +474,7 @@ addon.Spells = {
     [2637] = { type = CROWD_CONTROL }, -- Hibernate
         [18657] = { parent = 2637 },
         [18658] = { parent = 2637 },
-    [29166] = { type = BUFF_OFFENSIVE }, -- Innervate
+    [1129166] = { type = BUFF_OFFENSIVE }, -- Innervate
     [9005] = { type = CROWD_CONTROL }, -- Pounce Stun
         [9823] = { parent = 9005 },
         [9827] = { parent = 9005 },
@@ -523,16 +515,15 @@ addon.Spells = {
 
     -- WoTLK
     [41425] = { type = BUFF_OTHER, }, -- Hypothermia
-    [66] = { type = BUFF_OFFENSIVE, },  -- Invisibility
+    [1100066] = { type = BUFF_OFFENSIVE, },  -- Invisibility
     [42950] = { type = CROWD_CONTROL, },  -- Dragon's Breath
     [43039] = { type = BUFF_OTHER, },  -- Ice Barrier
     [44544] = { type = BUFF_OFFENSIVE, }, -- Fingers of Frost
     [44572] = { type = CROWD_CONTROL, }, -- Deep Freeze
     [54748] = { type = BUFF_OFFENSIVE, }, -- Burning Determination (Interrupt/Silence Immunity)
-    [55021] = { type = CROWD_CONTROL, }, -- Improved Counterspell
+    [1155021] = { type = CROWD_CONTROL, }, -- Improved Counterspell
     [64346] = { type = CROWD_CONTROL, }, -- Fiery Payback (Fire Mage Disarm)
 
-    [18469] = { type = CROWD_CONTROL }, -- Improved Counterspell
     [118] = { type = CROWD_CONTROL }, -- Polymorph
         [12824] = { parent = 118 },
         [12825] = { parent = 118 },
@@ -543,6 +534,7 @@ addon.Spells = {
         [71319] = { parent = 118 },
         [61305] = { parent = 118 },
         [61721] = { parent = 118 },
+        [1112826] = { parent = 118 },
 
     [11426] = { type = BUFF_DEFENSIVE }, -- Ice Barrier
         [13031] = { parent = 11426 },
@@ -560,7 +552,6 @@ addon.Spells = {
         [10177] = { parent = 6143 },
         [28609] = { parent = 6143 },
         [43012] = { parent = 6143 },
-    [12355] = { type = CROWD_CONTROL }, -- Impact Stun
     [12494] = { type = ROOT }, -- Frostbite
     [122] = { type = ROOT }, -- Frost Nova
         [865] = { parent = 122 },
@@ -571,7 +562,7 @@ addon.Spells = {
         [55080] = { parent = 122 }, -- Shattered Barrier
     [12042] = { type = BUFF_OFFENSIVE }, -- Arcane Power
     [45438] = { type = IMMUNITY }, -- Ice Block
-    [12051] = { type = BUFF_OFFENSIVE }, -- Evocation
+    [1112051] = { type = BUFF_OFFENSIVE }, -- Evocation
     [1463] = { type = BUFF_DEFENSIVE }, -- Mana Shield
         [8494] = { parent = 1463 },
         [8495] = { parent = 1463 },
@@ -582,14 +573,15 @@ addon.Spells = {
         [33041] = { parent = 31661 },
         [33042] = { parent = 31661 },
         [33043] = { parent = 31661 },
-    [12043] = { type = BUFF_OFFENSIVE }, -- Presence of Mind
+        [1133043] = { parent = 31661 },
+    [1112043] = { type = BUFF_OFFENSIVE }, -- Presence of Mind
     [33395] = { type = ROOT }, -- Freeze
     [12472] = { type = BUFF_OFFENSIVE }, -- Icy Veins
 
-    [82691] = { type = CROWD_CONTROL, }, -- Ring of Frost
-    [954854] = { type = CROWD_CONTROL, }, -- Ring of Frost (Ascension)
+    [1398221] = { type = CROWD_CONTROL, }, -- Ring of Frost (Ascension)
     [115760] = { type = IMMUNITY_SPELL }, -- Glyph of Ice Block
-    [118271] = { type = CROWD_CONTROL }, -- Combustion Impact
+    [1164343] = { type = BUFF_OFFENSIVE, strict = true }, -- Impact (Buff)
+    [1112355] = { type = CROWD_CONTROL, strict = true }, -- Impact (stun)
     [102051] = { type = CROWD_CONTROL }, -- Frostjaw (Root Silence)
     [111340] = { type = ROOT }, -- Ice Ward
     [121288] = { type = ROOT }, -- Chilled (Frost Armor)
