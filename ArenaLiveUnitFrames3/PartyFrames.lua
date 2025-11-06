@@ -164,6 +164,18 @@ function ALUF_PartyFrames:OnEnable()
 			petFrame:UpdateUnit("partypet"..i);
 		end
 	end
+
+
+	for i=1,4 do
+		_G["PartyMemberFrame"..i]:UnregisterAllEvents()
+		_G["PartyMemberFrame"..i.."PetFrame"]:UnregisterAllEvents()
+		
+		--if database.PartyFrames.PartyHeader.ShowParty then
+		if true then
+			_G["PartyMemberFrame"..i]:Hide();
+			_G["PartyMemberFrame"..i.."PetFrame"]:Hide();
+		end
+	end
 end
 
 function ALUF_PartyFrames:OnDisable()

@@ -17,18 +17,10 @@ end
 LoadAddOn("Blizzard_ArenaUI")
 for i=1,5 do
 	_G["ArenaEnemyFrame"..i].Show = function () end;
+	_G["ArenaEnemyFrame"..i]:Hide()
 	_G["ArenaEnemyFrame"..i.."PetFrame"].Show = function () end;
+	_G["ArenaEnemyFrame"..i.."PetFrame"]:Hide()
 end
-for i=1,4 do
-	_G["PartyMemberFrame"..i].Show = function () end;
-	_G["PartyMemberFrame"..i.."PetFrame"].Show = function () end;
-	
-	--if database.PartyFrames.PartyHeader.ShowParty then
-	if true then
-		_G["PartyMemberFrame"..i]:Hide();
-		_G["PartyMemberFrame"..i.."PetFrame"]:Hide();
-	end
-end	
 
 -- Set up some base values:
 local ARENALIVE_CHAT_MSG_PREFIX = "|cFFFF0000ArenaLive:|r ";

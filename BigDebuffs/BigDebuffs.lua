@@ -180,7 +180,7 @@ for id, options in pairs(addon.Spells) do
         newOptions.type = options.type
         newOptions.strict = options.strict
         newOptions.duration = options.duration
-        newOptions.spellId = options.id
+        newOptions.spellId = id
         newOptions.nounitFrames = options.nounitFrames
         if options.parent then
             newOptions.parent = GetSpellName(options.parent)
