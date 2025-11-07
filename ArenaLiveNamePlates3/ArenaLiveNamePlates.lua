@@ -103,17 +103,6 @@ NamePlate:RegisterEvent("UNIT_AURA");
 NamePlate:RegisterEvent("UNIT_NAME_UPDATE");
 NamePlate:RegisterEvent("UNIT_PET");
 NamePlate:RegisterEvent("UNIT_HEALTH");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_START");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_DELAYED");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_STOP");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_FAILED");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_FAILED_QUIET");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_FAILED_INTERRUPTED");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_NOT_INTERRUPTABLE");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_CHANNEL_UPDATE");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
-NamePlate:RegisterEvent("UNIT_SPELLCAST_FAILED_QUIET");
 NamePlate:RegisterEvent("UNIT_HEAL_PREDICTION");
 NamePlate:RegisterEvent("NAME_PLATE_CREATED");
 NamePlate:RegisterEvent("NAME_PLATE_UNIT_ADDED");
@@ -121,30 +110,6 @@ NamePlate:RegisterEvent("NAME_PLATE_UNIT_REMOVED");
 NamePlate:RegisterEvent("ADDON_LOADED");
 
 local castBarsCasting = {}
-function NamePlate_OnUpdate(self, elapsed)
-	CastBar_OnUpdate(elapsed)
-end
-
--- FIXME: very expensive, ideally we only need to update the values, not read casting info again
--- if we were using a proper ArenaLive castbar, that should already work - maybe re-using Blizzard's is not the way'
-function CastBar_OnUpdate(elapsed)
-	for castBar in pairs(castBarsCasting) do
-		if ( castBar.casting ) then
-			castBar.value = castBar.value + elapsed
-			castBar:SetValue(castBar.value)
-			if castBar.value >= castBar.maxValue then
-				castBar:Hide()
-			end
-		elseif ( castBar.channeling ) then
-			castBar.value = castBar.value - elapsed
-			castBar:SetValue(castBar.value)
-			if castBar.value <= 0 then
-				castBar:Hide()
-			end
-		end
-	end
-end
-NamePlate:SetScript("OnUpdate", NamePlate_OnUpdate)
 
 -- Set Attributes:
 NamePlate.unitNameCache = {};
@@ -276,19 +241,16 @@ function NamePlate:SetBlizzPlateStructure(blizzPlate)
 	end
     blizzPlate.hookedByAL = true
 
-    local mainFrame, nameFrame = blizzPlate:GetChildren();
-	blizzPlate.mainFrame = mainFrame;
-	blizzPlate.nameFrame = nameFrame;
+    local healthBar, castBar = blizzPlate:GetChildren();
+	blizzPlate.mainFrame = healthBar;
+	blizzPlate.healthBar = healthBar;
 
-	local healthbar, nameframe, threat = blizzPlate:GetChildren()
-	local health, castbar = healthbar:GetChildren()
 	local threat, hpborder, cbshield, cbborder, cbicon, overlay, name, level, bossicon, raidicon, elite = blizzPlate:GetRegions()
 
 	-- Get castbar and healthbar of a nameplate:
-	blizzPlate.healthBar = healthbar;
-
-	local castBar = castbar;
-	blizzPlate.castBar = cbborder;
+	
+	blizzPlate.castBar = castBar;
+	blizzPlate.castBar.border = cbborder;
 	blizzPlate.castBar.shield = cbshield;
 	blizzPlate.castBar.icon = cbicon;
 	blizzPlate.castBar.text = overlay;
@@ -302,12 +264,10 @@ function NamePlate:SetBlizzPlateStructure(blizzPlate)
 	blizzPlate.healthBar:HookScript("OnValueChanged", NamePlateHealthBar_OnValueChanged);
 	blizzPlate.healthBar:HookScript("OnMinMaxChanged", NamePlateHealthBar_OnValueChanged);
 
-	--[[
 	blizzPlate.castBar:HookScript("OnValueChanged", NamePlateCastBar_OnValueChanged);
 	blizzPlate.castBar:HookScript("OnMinMaxChanged", NamePlateCastBar_OnValueChanged);
 	blizzPlate.castBar:HookScript("OnShow", NamePlateCastBar_OnValueChanged);
 	blizzPlate.castBar:HookScript("OnHide", NamePlateCastBar_OnValueChanged);
-	]]
 
 	-- FIXME: More elegant?
 	-- without this hacky hook, the name and level text keep updating and showing themselves :(
@@ -317,7 +277,7 @@ function NamePlate:SetBlizzPlateStructure(blizzPlate)
 		end
 
 		blizzPlate.mainFrame:SetAlpha(0);
-		blizzPlate.nameFrame:SetAlpha(0);
+		blizzPlate.castBar:SetAlpha(0);
 		if blizzPlate.threat then
 			blizzPlate.threat:SetAlpha(0);
 		end
@@ -332,7 +292,7 @@ end
 function NamePlate:HideBlizzardNamePlate(blizzPlate)
 	-- Set Alpha to zero instead of actually hiding them:
 	blizzPlate.mainFrame:SetAlpha(0);
-	blizzPlate.nameFrame:SetAlpha(0);
+	blizzPlate.castBar:SetAlpha(0);
 	blizzPlate.nameText:SetAlpha(0);
 	blizzPlate.level:SetAlpha(0);
 
@@ -423,18 +383,8 @@ function NamePlate:OnEvent(event, ...)
 				blizzPlate.unit = nil
 				namePlate:UpdateUnit(nil);
 			namePlate:Update();
+			end
 		end
-	end
-
-	elseif ( event:sub(1, #"UNIT_SPELLCAST") == "UNIT_SPELLCAST") then
-		local unit = ...
-		local unitFrame = C_NamePlate.GetNamePlateForUnit(unit);
-		if not unitFrame then return end
-
-		local namePlate = self.namePlates[unitFrame];
-		if not namePlate then return end
-		namePlate:UpdateCastBar();
-
     elseif (event == "ADDON_LOADED" ) then
         local addonName = ...
         if addonName == "BigDebuffs" then
