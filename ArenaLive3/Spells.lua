@@ -2,45 +2,45 @@ ArenaLive.spellDB = {
 			["Trinket"] = { 142292, 120 }, -- SpellID and cooldown of the PvP-Trinket
 			["Racials"] = {
 				-- First Number is the SpellID, 2nd one is the CD and 3rd is the shared CD with the PvP-Trinket. Use 0 if they don't have a shared CD.
-				["Human"] =  { 59752, 120, 0 },
-				["Dwarf"] = { 20594, 120, 0 },
+				["Human"] =  { 1159752, 120, 0 },
+				["Dwarf"] = { 1120594, 120, 0 },
 				["NightElf"] = { 1158984, 120, 0}, -- Shadowmeld
-				["Gnome"] = { 20589, 90, 0 },
-				["Draenei"] = { 28880, 180, 0},
-				["Orc"] = { 20572, 120, 0 }, -- Since Orcs also have class-specific racials, we need to add all of them
-				["Scourge"] = { 7744, 120, 0 },
-				["Tauren"] = { 20549, 120, 0 },
-				["Troll"] = { 26297, 180, 0 },
+				["Gnome"] = { 1120589, 90, 0 },
+				["Draenei"] = { 1128880, 180, 0},
+				["Orc"] = { 1120572, 120, 0 }, -- Since Orcs also have class-specific racials, we need to add all of them
+				["Scourge"] = { 117744, 120, 0 },
+				["Tauren"] = { 1120549, 120, 0 },
+				["Troll"] = { 1126297, 180, 0 },
 				["BloodElf"] = {
-					["PALADIN"] = { 28730, 120, 0 },
-					["HUNTER"] = { 28730, 120, 0},
-					["ROGUE"] = { 25046, 120, 0 },
-					["PRIEST"] = { 28730, 120, 0 },
-					["MAGE"] = { 28730, 120, 0 },
-					["WARLOCK"] = { 28730, 120, 0 },
+					["PALADIN"] = { 1128730, 120, 0 },
+					["HUNTER"] = { 1128730, 120, 0},
+					["ROGUE"] = { 1125046, 120, 0 },
+					["PRIEST"] = { 1128730, 120, 0 },
+					["MAGE"] = { 1128730, 120, 0 },
+					["WARLOCK"] = { 1128730, 120, 0 },
 				},
 			},
 			["CooldownResets"] = {
-				[11958] = {				-- Mage: Cold Snap
-					[120] = true,			-- Cone of Cold
-					[122] = true,			-- Frost Nova
-					[45438] = true,			-- Ice Block
+				[1111958] = {				-- Mage: Cold Snap
+					[1100120] = true,			-- Cone of Cold
+					[1100122] = true,			-- Frost Nova
+					[1145438] = true,			-- Ice Block
 				},
-				[14185] = {				-- Rogue: Preparation
-					[2983] = true,
-					[1856] = true,
-					[5277] = true,
+				[1114185] = {				-- Rogue: Preparation
+					[1102983] = true,
+					[1101856] = true,
+					[1105277] = true,
 				},
 			},			
 			["CCIndicator"] = { -- This table is used to track those spells, that are shown in the cc indcator.
 				-- The order is [spellID] = Priority-Type.
 
 				-- Racials
-				[20594] = "usefulBuffs",    -- Stoneform
-				[20549] = "stun",           -- War Stomp
-				[28730] = "silence",        -- Arcane Torrent
-				[25046] = "silence",        -- Arcane Torrent
-				[50613] = "silence",        -- Arcane Torrent
+				[1120594] = "usefulBuffs",    -- Stoneform
+				[1120549] = "stun",           -- War Stomp
+				[1128730] = "silence",        -- Arcane Torrent
+				[1125046] = "silence",        -- Arcane Torrent
+				[1150613] = "silence",        -- Arcane Torrent
 				[129597] = "silence",        -- Arcane Torrent
 
 				-- Other
@@ -415,274 +415,274 @@ ArenaLive.spellDB = {
 		},
 		["Interrupts"] = {
 			-- TO DO: SPEC SPECIFIC SPELLS
-			["DRUID"] = { 16979, 15, false }, 		-- Feral Charge - Bear
-			["HUNTER"] = { 34490, 20, false }, 		-- Silencing Shot
-			["MAGE"] = { 2139, 24, false }, 		-- Counter Spell
-			["PALADIN"] = { 10308, 45, false }, 	-- HoJ
-			["PRIEST"] = { 10890, 27, false }, 		-- Purify
-			["ROGUE"] = { 1766, 10, false }, 		-- Kick
-			["WARRIOR"] = { 6554, 10, false },		-- Pummel
-			["SHAMAN"] = { 57994, 6, false },		-- Wind Shear
-			["WARLOCK"] = { 19647, 24, false },	
+			["DRUID"] = { 1116979, 15, false }, 		-- Feral Charge - Bear
+			["HUNTER"] = { 1134490, 20, false }, 		-- Silencing Shot
+			["MAGE"] = { 1102139, 24, false }, 		-- Counter Spell
+			["PALADIN"] = { 1110308, 45, false }, 	-- HoJ
+			["PRIEST"] = { 1110890, 27, false }, 		-- Purify
+			["ROGUE"] = { 111766, 10, false }, 		-- Kick
+			["WARRIOR"] = { 116554, 10, false },		-- Pummel
+			["SHAMAN"] = { 1157994, 6, false },		-- Wind Shear
+			["WARLOCK"] = { 1119647, 24, false },	
 		},
 		["SharedCooldowns"] = {
-			[59752] = { 142292, 120 }, -- PvP trinket
-			[59752] = { 65547, 120 }, -- PvP trinket
-			[59752] = { 42292, 120 }, -- PvP trinket
-			[6552] = { 72, 10 }, -- Pummel -> Shield Bash
-			[72] = { 6552, 10 }, -- Shield Bash -> Pummel
+			[1159752] = { 142292, 120 }, -- PvP trinket
+			[1159752] = { 1165547, 120 }, -- PvP trinket
+			[1159752] = { 1142292, 120 }, -- PvP trinket
+			[1106552] = { 1100072, 10 }, -- Pummel -> Shield Bash
+			[1100072] = { 1106552, 10 }, -- Shield Bash -> Pummel
 		},
 		["DiminishingReturns"] =
 		{
 			
 			-- strict means the actual spell needs to match by ID, for specific cases
 
-			[49203] = { type = "incapacitate" }, -- Hungering Cold
-			[2637]  = { type = "incapacitate" }, -- Hibernate (Rank 1)
-			[18657] = { type = "incapacitate" }, -- Hibernate (Rank 2)
-			[18658] = { type = "incapacitate" }, -- Hibernate (Rank 3)
-			[60210] = { type = "incapacitate" }, -- Freezing Arrow Effect (Rank 1)
-			[3355]  = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 1)
-			[14308] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 2)
-			[14309] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 3)
-			[19386] = { type = "incapacitate" }, -- Wyvern Sting (Rank 1)
-			[24132] = { type = "incapacitate" }, -- Wyvern Sting (Rank 2)
-			[24133] = { type = "incapacitate" }, -- Wyvern Sting (Rank 3)
-			[27068] = { type = "incapacitate" }, -- Wyvern Sting (Rank 4)
-			[49011] = { type = "incapacitate" }, -- Wyvern Sting (Rank 5)
-			[49012] = { type = "incapacitate" }, -- Wyvern Sting (Rank 6)
-			[118]   = { type = "incapacitate" }, -- Polymorph (Rank 1)
-			[12824] = { type = "incapacitate" }, -- Polymorph (Rank 2)
-			[12825] = { type = "incapacitate" }, -- Polymorph (Rank 3)
-			[12826] = { type = "incapacitate" }, -- Polymorph (Rank 4)
-			[28271] = { type = "incapacitate" }, -- Polymorph: Turtle
-			[28272] = { type = "incapacitate" }, -- Polymorph: Pig
-			[61721] = { type = "incapacitate" }, -- Polymorph: Rabbit
-			[61780] = { type = "incapacitate" }, -- Polymorph: Turkey
-			[61305] = { type = "incapacitate" }, -- Polymorph: Black Cat
-			[20066] = { type = "incapacitate" }, -- Repentance
-			[1776]  = { type = "incapacitate" }, -- Gouge
-			[6770]  = { type = "incapacitate" }, -- Sap (Rank 1)
-			[2070]  = { type = "incapacitate" }, -- Sap (Rank 2)
-			[11297] = { type = "incapacitate" }, -- Sap (Rank 3)
-			[51724] = { type = "incapacitate" }, -- Sap (Rank 4)
-			[710]   = { type = "incapacitate" }, -- Banish (Rank 1)
-			[18647] = { type = "incapacitate" }, -- Banish (Rank 2)
-			[9484]  = { type = "incapacitate" }, -- Shackle Undead (Rank 1)
-			[9485]  = { type = "incapacitate" }, -- Shackle Undead (Rank 2)
-			[10955] = { type = "incapacitate" }, -- Shackle Undead (Rank 3)
-			[51514] = { type = "incapacitate" }, -- Hex
-			[13327] = { type = "incapacitate" }, -- Reckless Charge (Rocket Helmet)
-			[4064]  = { type = "incapacitate" }, -- Rough Copper Bomb
-			[4065]  = { type = "incapacitate" }, -- Large Copper Bomb
-			[4066]  = { type = "incapacitate" }, -- Small Bronze Bomb
-			[4067]  = { type = "incapacitate" }, -- Big Bronze Bomb
-			[4068]  = { type = "incapacitate" }, -- Iron Grenade
-			[12421] = { type = "incapacitate" }, -- Mithril Frag Bomb
-			[4069]  = { type = "incapacitate" }, -- Big Iron Bomb
-			[12562] = { type = "incapacitate" }, -- The Big One
-			[12543] = { type = "incapacitate" }, -- Hi-Explosive Bomb
-			[19769] = { type = "incapacitate" }, -- Thorium Grenade
-			[19784] = { type = "incapacitate" }, -- Dark Iron Bomb
-			[30216] = { type = "incapacitate" }, -- Fel Iron Bomb
-			[30461] = { type = "incapacitate" }, -- The Bigger One
-			[30217] = { type = "incapacitate" }, -- Adamantite Grenade
-			[67769] = { type = "incapacitate" }, -- Cobalt Frag Bomb
-			[67890] = { type = "incapacitate" }, -- Cobalt Frag Bomb (Frag Belt)
-			[54466] = { type = "incapacitate" }, -- Saronite Grenade
+			[1149203] = { type = "incapacitate" }, -- Hungering Cold
+			[1102637] = { type = "incapacitate" }, -- Hibernate (Rank 1)
+			[1118657] = { type = "incapacitate" }, -- Hibernate (Rank 2)
+			[1118658] = { type = "incapacitate" }, -- Hibernate (Rank 3)
+			[1160210] = { type = "incapacitate" }, -- Freezing Arrow Effect (Rank 1)
+			[1103355] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 1)
+			[1114308] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 2)
+			[1114309] = { type = "incapacitate" }, -- Freezing Trap Effect (Rank 3)
+			[1119386] = { type = "incapacitate" }, -- Wyvern Sting (Rank 1)
+			[1124132] = { type = "incapacitate" }, -- Wyvern Sting (Rank 2)
+			[1124133] = { type = "incapacitate" }, -- Wyvern Sting (Rank 3)
+			[1127068] = { type = "incapacitate" }, -- Wyvern Sting (Rank 4)
+			[1149011] = { type = "incapacitate" }, -- Wyvern Sting (Rank 5)
+			[1149012] = { type = "incapacitate" }, -- Wyvern Sting (Rank 6)
+			[1100118] = { type = "incapacitate" }, -- Polymorph (Rank 1)
+			[1112824] = { type = "incapacitate" }, -- Polymorph (Rank 2)
+			[1112825] = { type = "incapacitate" }, -- Polymorph (Rank 3)
+			[1112826] = { type = "incapacitate" }, -- Polymorph (Rank 4)
+			[1128271] = { type = "incapacitate" }, -- Polymorph: Turtle
+			[1128272] = { type = "incapacitate" }, -- Polymorph: Pig
+			[1161721] = { type = "incapacitate" }, -- Polymorph: Rabbit
+			[1161780] = { type = "incapacitate" }, -- Polymorph: Turkey
+			[1161305] = { type = "incapacitate" }, -- Polymorph: Black Cat
+			[1120066] = { type = "incapacitate" }, -- Repentance
+			[1101776] = { type = "incapacitate" }, -- Gouge
+			[1106770] = { type = "incapacitate" }, -- Sap (Rank 1)
+			[1102070] = { type = "incapacitate" }, -- Sap (Rank 2)
+			[1111297] = { type = "incapacitate" }, -- Sap (Rank 3)
+			[1151724] = { type = "incapacitate" }, -- Sap (Rank 4)
+			[1100710] = { type = "incapacitate" }, -- Banish (Rank 1)
+			[1118647] = { type = "incapacitate" }, -- Banish (Rank 2)
+			[1109484] = { type = "incapacitate" }, -- Shackle Undead (Rank 1)
+			[1109485] = { type = "incapacitate" }, -- Shackle Undead (Rank 2)
+			[1110955] = { type = "incapacitate" }, -- Shackle Undead (Rank 3)
+			[1151514] = { type = "incapacitate" }, -- Hex
+			[1113327] = { type = "incapacitate" }, -- Reckless Charge (Rocket Helmet)
+			[1104064] = { type = "incapacitate" }, -- Rough Copper Bomb
+			[1104065] = { type = "incapacitate" }, -- Large Copper Bomb
+			[1104066] = { type = "incapacitate" }, -- Small Bronze Bomb
+			[1104067] = { type = "incapacitate" }, -- Big Bronze Bomb
+			[1104068] = { type = "incapacitate" }, -- Iron Grenade
+			[1112421] = { type = "incapacitate" }, -- Mithril Frag Bomb
+			[1104069] = { type = "incapacitate" }, -- Big Iron Bomb
+			[1112562] = { type = "incapacitate" }, -- The Big One
+			[1112543] = { type = "incapacitate" }, -- Hi-Explosive Bomb
+			[1119769] = { type = "incapacitate" }, -- Thorium Grenade
+			[1119784] = { type = "incapacitate" }, -- Dark Iron Bomb
+			[1130216] = { type = "incapacitate" }, -- Fel Iron Bomb
+			[1130461] = { type = "incapacitate" }, -- The Bigger One
+			[1130217] = { type = "incapacitate" }, -- Adamantite Grenade
+			[1167769] = { type = "incapacitate" }, -- Cobalt Frag Bomb
+			[1167890] = { type = "incapacitate" }, -- Cobalt Frag Bomb (Frag Belt)
+			[1154466] = { type = "incapacitate" }, -- Saronite Grenade
 
-			[47481] = { type = "stun" }, -- Gnaw (Ghoul Pet)
-			[5211]  = { type = "stun" }, -- Bash (Rank 1)
-			[6798]  = { type = "stun" }, -- Bash (Rank 2)
-			[8983]  = { type = "stun" }, -- Bash (Rank 3)
-			[22570] = { type = "stun" }, -- Maim (Rank 1)
-			[49802] = { type = "stun" }, -- Maim (Rank 2)
-			[24394] = { type = "stun" }, -- Intimidation
-			[50519] = { type = "stun" }, -- Sonic Blast (Pet Rank 1)
-			[53564] = { type = "stun" }, -- Sonic Blast (Pet Rank 2)
-			[53565] = { type = "stun" }, -- Sonic Blast (Pet Rank 3)
-			[53566] = { type = "stun" }, -- Sonic Blast (Pet Rank 4)
-			[53567] = { type = "stun" }, -- Sonic Blast (Pet Rank 5)
-			[53568] = { type = "stun" }, -- Sonic Blast (Pet Rank 6)
-			[50518] = { type = "stun" }, -- Ravage (Pet Rank 1)
-			[53558] = { type = "stun" }, -- Ravage (Pet Rank 2)
-			[53559] = { type = "stun" }, -- Ravage (Pet Rank 3)
-			[53560] = { type = "stun" }, -- Ravage (Pet Rank 4)
-			[53561] = { type = "stun" }, -- Ravage (Pet Rank 5)
-			[53562] = { type = "stun" }, -- Ravage (Pet Rank 6)
-			[44572] = { type = "stun" }, -- Deep Freeze
-			[853]   = { type = "stun" }, -- Hammer of Justice (Rank 1)
-			[5588]  = { type = "stun" }, -- Hammer of Justice (Rank 2)
-			[5589]  = { type = "stun" }, -- Hammer of Justice (Rank 3)
-			[10308] = { type = "stun" }, -- Hammer of Justice (Rank 4)
-			[2812]  = { type = "stun" }, -- Holy Wrath (Rank 1)
-			[10318] = { type = "stun" }, -- Holy Wrath (Rank 2)
-			[27139] = { type = "stun" }, -- Holy Wrath (Rank 3)
-			[48816] = { type = "stun" }, -- Holy Wrath (Rank 4)
-			[48817] = { type = "stun" }, -- Holy Wrath (Rank 5)
-			[408]   = { type = "stun" }, -- Kidney Shot (Rank 1)
-			[8643]  = { type = "stun" }, -- Kidney Shot (Rank 2)
-			[58861] = { type = "stun" }, -- Bash (Spirit Wolves)
-			[30283] = { type = "stun" }, -- Shadowfury (Rank 1)
-			[30413] = { type = "stun" }, -- Shadowfury (Rank 2)
-			[30414] = { type = "stun" }, -- Shadowfury (Rank 3)
-			[47846] = { type = "stun" }, -- Shadowfury (Rank 4)
-			[47847] = { type = "stun" }, -- Shadowfury (Rank 5)
-			[12809] = { type = "stun" }, -- Concussion Blow
-			[60995] = { type = "stun" }, -- Demon Charge
-			[30153] = { type = "stun" }, -- Intercept (Felguard Rank 1)
-			[30195] = { type = "stun" }, -- Intercept (Felguard Rank 2)
-			[30197] = { type = "stun" }, -- Intercept (Felguard Rank 3)
-			[47995] = { type = "stun" }, -- Intercept (Felguard Rank 4)
-			[20253] = { type = "stun" }, -- Intercept Stun (Rank 1)
-			[20614] = { type = "stun" }, -- Intercept Stun (Rank 2)
-			[20615] = { type = "stun" }, -- Intercept Stun (Rank 3)
-			[25273] = { type = "stun" }, -- Intercept Stun (Rank 4)
-			[25274] = { type = "stun" }, -- Intercept Stun (Rank 5)
-			[46968] = { type = "stun" }, -- Shockwave
-			[20549] = { type = "stun" }, -- War Stomp (Racial)
+			[1147481] = { type = "stun" }, -- Gnaw (Ghoul Pet)
+			[1105211] = { type = "stun" }, -- Bash (Rank 1)
+			[1106798] = { type = "stun" }, -- Bash (Rank 2)
+			[1108983] = { type = "stun" }, -- Bash (Rank 3)
+			[1122570] = { type = "stun" }, -- Maim (Rank 1)
+			[1149802] = { type = "stun" }, -- Maim (Rank 2)
+			[1124394] = { type = "stun" }, -- Intimidation
+			[1150519] = { type = "stun" }, -- Sonic Blast (Pet Rank 1)
+			[1153564] = { type = "stun" }, -- Sonic Blast (Pet Rank 2)
+			[1153565] = { type = "stun" }, -- Sonic Blast (Pet Rank 3)
+			[1153566] = { type = "stun" }, -- Sonic Blast (Pet Rank 4)
+			[1153567] = { type = "stun" }, -- Sonic Blast (Pet Rank 5)
+			[1153568] = { type = "stun" }, -- Sonic Blast (Pet Rank 6)
+			[1150518] = { type = "stun" }, -- Ravage (Pet Rank 1)
+			[1153558] = { type = "stun" }, -- Ravage (Pet Rank 2)
+			[1153559] = { type = "stun" }, -- Ravage (Pet Rank 3)
+			[1153560] = { type = "stun" }, -- Ravage (Pet Rank 4)
+			[1153561] = { type = "stun" }, -- Ravage (Pet Rank 5)
+			[1153562] = { type = "stun" }, -- Ravage (Pet Rank 6)
+			[1144572] = { type = "stun" }, -- Deep Freeze
+			[1100853] = { type = "stun" }, -- Hammer of Justice (Rank 1)
+			[1105588] = { type = "stun" }, -- Hammer of Justice (Rank 2)
+			[1105589] = { type = "stun" }, -- Hammer of Justice (Rank 3)
+			[1110308] = { type = "stun" }, -- Hammer of Justice (Rank 4)
+			[1102812] = { type = "stun" }, -- Holy Wrath (Rank 1)
+			[1110318] = { type = "stun" }, -- Holy Wrath (Rank 2)
+			[1127139] = { type = "stun" }, -- Holy Wrath (Rank 3)
+			[1148816] = { type = "stun" }, -- Holy Wrath (Rank 4)
+			[1148817] = { type = "stun" }, -- Holy Wrath (Rank 5)
+			[1100408] = { type = "stun" }, -- Kidney Shot (Rank 1)
+			[1108643] = { type = "stun" }, -- Kidney Shot (Rank 2)
+			[1158861] = { type = "stun" }, -- Bash (Spirit Wolves)
+			[1130283] = { type = "stun" }, -- Shadowfury (Rank 1)
+			[1130413] = { type = "stun" }, -- Shadowfury (Rank 2)
+			[1130414] = { type = "stun" }, -- Shadowfury (Rank 3)
+			[1147846] = { type = "stun" }, -- Shadowfury (Rank 4)
+			[1147847] = { type = "stun" }, -- Shadowfury (Rank 5)
+			[1112809] = { type = "stun" }, -- Concussion Blow
+			[1160995] = { type = "stun" }, -- Demon Charge
+			[1130153] = { type = "stun" }, -- Intercept (Felguard Rank 1)
+			[1130195] = { type = "stun" }, -- Intercept (Felguard Rank 2)
+			[1130197] = { type = "stun" }, -- Intercept (Felguard Rank 3)
+			[1147995] = { type = "stun" }, -- Intercept (Felguard Rank 4)
+			[1120253] = { type = "stun" }, -- Intercept Stun (Rank 1)
+			[1120614] = { type = "stun" }, -- Intercept Stun (Rank 2)
+			[1120615] = { type = "stun" }, -- Intercept Stun (Rank 3)
+			[1125273] = { type = "stun" }, -- Intercept Stun (Rank 4)
+			[1125274] = { type = "stun" }, -- Intercept Stun (Rank 5)
+			[1146968] = { type = "stun" }, -- Shockwave
+			[1120549] = { type = "stun" }, -- War Stomp (Racial)
 
 
-			[16922]   = { type = "random_stun" },  -- Celestial Focus (Starfire Stun)
-			[28445]   = { type = "random_stun" },  -- Improved Concussive Shot
-			[12355]   = { type = "random_stun" },  -- Impact
-			[20170]   = { type = "random_stun" },  -- Seal of Justice Stun
-			[39796]   = { type = "random_stun" },  -- Stoneclaw Stun
-			[12798]   = { type = "random_stun" },  -- Revenge Stun
-			[5530]    = { type = "random_stun" },  -- Mace Stun Effect (Mace Specialization)
-			[15283]   = { type = "random_stun" },  -- Stunning Blow (Weapon Proc)
-			[56]      = { type = "random_stun" },  -- Stun (Weapon Proc)
-			[34510]   = { type = "random_stun" },  -- Stormherald/Deep Thunder (Weapon Proc)
+			[1116922]   = { type = "random_stun" },  -- Celestial Focus (Starfire Stun)
+			[1128445]   = { type = "random_stun" },  -- Improved Concussive Shot
+			[1112355]   = { type = "random_stun" },  -- Impact
+			[1120170]   = { type = "random_stun" },  -- Seal of Justice Stun
+			[1139796]   = { type = "random_stun" },  -- Stoneclaw Stun
+			[1112798]   = { type = "random_stun" },  -- Revenge Stun
+			[1105530]    = { type = "random_stun" },  -- Mace Stun Effect (Mace Specialization)
+			[1115283]   = { type = "random_stun" },  -- Stunning Blow (Weapon Proc)
+			[1100056]      = { type = "random_stun" },  -- Stun (Weapon Proc)
+			[1134510]   = { type = "random_stun" },  -- Stormherald/Deep Thunder (Weapon Proc)
 			[1572740] = { type = "random_stun" },  -- Stormbolt
 
-			[1513]  = { type = "fear" }, -- Scare Beast (Rank 1)
-			[14326] = { type = "fear" }, -- Scare Beast (Rank 2)
-			[14327] = { type = "fear" }, -- Scare Beast (Rank 3)
-			[10326] = { type = "fear" }, -- Turn Evil
-			[8122]  = { type = "fear" }, -- Psychic Scream (Rank 1)
-			[8124]  = { type = "fear" }, -- Psychic Scream (Rank 2)
-			[10888] = { type = "fear" }, -- Psychic Scream (Rank 3)
-			[10890] = { type = "fear" }, -- Psychic Scream (Rank 4)
-			[2094]  = { type = "fear" }, -- Blind
-			[5782]  = { type = "fear" }, -- Fear (Rank 1)
-			[6213]  = { type = "fear" }, -- Fear (Rank 2)
-			[6215]  = { type = "fear" }, -- Fear (Rank 3)
-			[6358]  = { type = "fear" }, -- Seduction (Succubus)
-			[5484]  = { type = "fear" }, -- Howl of Terror (Rank 1)
-			[17928] = { type = "fear" }, -- Howl of Terror (Rank 2)
-			[5246]  = { type = "fear" }, -- Intimidating Shout
-			[5134]  = { type = "fear" }, -- Flash Bomb Fear (Item)
+			[1101513] = { type = "fear" }, -- Scare Beast (Rank 1)
+			[1114326] = { type = "fear" }, -- Scare Beast (Rank 2)
+			[1114327] = { type = "fear" }, -- Scare Beast (Rank 3)
+			[1110326] = { type = "fear" }, -- Turn Evil
+			[1108122] = { type = "fear" }, -- Psychic Scream (Rank 1)
+			[1108124] = { type = "fear" }, -- Psychic Scream (Rank 2)
+			[1110888] = { type = "fear" }, -- Psychic Scream (Rank 3)
+			[1110890] = { type = "fear" }, -- Psychic Scream (Rank 4)
+			[1102094] = { type = "fear" }, -- Blind
+			[1105782] = { type = "fear" }, -- Fear (Rank 1)
+			[1106213] = { type = "fear" }, -- Fear (Rank 2)
+			[1106215] = { type = "fear" }, -- Fear (Rank 3)
+			[1106358] = { type = "fear" }, -- Seduction (Succubus)
+			[1105484] = { type = "fear" }, -- Howl of Terror (Rank 1)
+			[1117928] = { type = "fear" }, -- Howl of Terror (Rank 2)
+			[1105246] = { type = "fear" }, -- Intimidating Shout
+			[1105134] = { type = "fear" }, -- Flash Bomb Fear (Item)
 
-			[339]   = { type = "root" }, -- Entangling Roots (Rank 1)
-			[1062]  = { type = "root" }, -- Entangling Roots (Rank 2)
-			[5195]  = { type = "root" }, -- Entangling Roots (Rank 3)
-			[5196]  = { type = "root" }, -- Entangling Roots (Rank 4)
-			[9852]  = { type = "root" }, -- Entangling Roots (Rank 5)
-			[9853]  = { type = "root" }, -- Entangling Roots (Rank 6)
-			[26989] = { type = "root" }, -- Entangling Roots (Rank 7)
-			[53308] = { type = "root" }, -- Entangling Roots (Rank 8)
-			[65857] = { type = "root" }, -- Entangling Roots (Rank 8) (TODO: Not sure which ID is correct)
-			[19975] = { type = "root" }, -- Nature's Grasp (Rank 1)
-			[19974] = { type = "root" }, -- Nature's Grasp (Rank 2)
-			[19973] = { type = "root" }, -- Nature's Grasp (Rank 3)
-			[19972] = { type = "root" }, -- Nature's Grasp (Rank 4)
-			[19971] = { type = "root" }, -- Nature's Grasp (Rank 5)
-			[19970] = { type = "root" }, -- Nature's Grasp (Rank 6)
-			[27010] = { type = "root" }, -- Nature's Grasp (Rank 7)
-			[53313] = { type = "root" }, -- Nature's Grasp (Rank 8)
-			[66070] = { type = "root" }, -- Nature's Grasp (Rank 8) (TODO: Not sure which ID is correct)
-			[50245] = { type = "root" }, -- Pin (Rank 1)
-			[53544] = { type = "root" }, -- Pin (Rank 2)
-			[53545] = { type = "root" }, -- Pin (Rank 3)
-			[53546] = { type = "root" }, -- Pin (Rank 4)
-			[53547] = { type = "root" }, -- Pin (Rank 5)
-			[53548] = { type = "root" }, -- Pin (Rank 6)
-			[33395] = { type = "root" }, -- Freeze (Water Elemental)
-			[122]   = { type = "root" }, -- Frost Nova (Rank 1)
-			[865]   = { type = "root" }, -- Frost Nova (Rank 2)
-			[6131]  = { type = "root" }, -- Frost Nova (Rank 3)
-			[10230] = { type = "root" }, -- Frost Nova (Rank 4)
-			[27088] = { type = "root" }, -- Frost Nova (Rank 5)
-			[42917] = { type = "root" }, -- Frost Nova (Rank 6)
-			[64695] = { type = "root" }, -- Earthgrab
-			[39965] = { type = "root" }, -- Frost Grenade (Item)
-			[63685] = { type = "root" }, -- Freeze (Frost Shock)
-			[55536] = { type = "root" }, -- Frostweave Net (Item)
+			[1100339] = { type = "root" }, -- Entangling Roots (Rank 1)
+			[1101062] = { type = "root" }, -- Entangling Roots (Rank 2)
+			[1105195] = { type = "root" }, -- Entangling Roots (Rank 3)
+			[1105196] = { type = "root" }, -- Entangling Roots (Rank 4)
+			[1109852] = { type = "root" }, -- Entangling Roots (Rank 5)
+			[1109853] = { type = "root" }, -- Entangling Roots (Rank 6)
+			[1126989] = { type = "root" }, -- Entangling Roots (Rank 7)
+			[1153308] = { type = "root" }, -- Entangling Roots (Rank 8)
+			[1165857] = { type = "root" }, -- Entangling Roots (Rank 8) (TODO: Not sure which ID is correct)
+			[1119975] = { type = "root" }, -- Nature's Grasp (Rank 1)
+			[1119974] = { type = "root" }, -- Nature's Grasp (Rank 2)
+			[1119973] = { type = "root" }, -- Nature's Grasp (Rank 3)
+			[1119972] = { type = "root" }, -- Nature's Grasp (Rank 4)
+			[1119971] = { type = "root" }, -- Nature's Grasp (Rank 5)
+			[1119970] = { type = "root" }, -- Nature's Grasp (Rank 6)
+			[1127010] = { type = "root" }, -- Nature's Grasp (Rank 7)
+			[1153313] = { type = "root" }, -- Nature's Grasp (Rank 8)
+			[1166070] = { type = "root" }, -- Nature's Grasp (Rank 8) (TODO: Not sure which ID is correct)
+			[1150245] = { type = "root" }, -- Pin (Rank 1)
+			[1153544] = { type = "root" }, -- Pin (Rank 2)
+			[1153545] = { type = "root" }, -- Pin (Rank 3)
+			[1153546] = { type = "root" }, -- Pin (Rank 4)
+			[1153547] = { type = "root" }, -- Pin (Rank 5)
+			[1153548] = { type = "root" }, -- Pin (Rank 6)
+			[1133395] = { type = "root" }, -- Freeze (Water Elemental)
+			[1100122] = { type = "root" }, -- Frost Nova (Rank 1)
+			[1100865] = { type = "root" }, -- Frost Nova (Rank 2)
+			[1106131] = { type = "root" }, -- Frost Nova (Rank 3)
+			[1110230] = { type = "root" }, -- Frost Nova (Rank 4)
+			[1127088] = { type = "root" }, -- Frost Nova (Rank 5)
+			[1142917] = { type = "root" }, -- Frost Nova (Rank 6)
+			[1164695] = { type = "root" }, -- Earthgrab
+			[1139965] = { type = "root" }, -- Frost Grenade (Item)
+			[1163685] = { type = "root" }, -- Freeze (Frost Shock)
+			[1155536] = { type = "root" }, -- Frostweave Net (Item)
 
-			[12494] = { type = "random_root" },         -- Frostbite
-			[55080] = { type = "random_root" },         -- Shattered Barrier
-			[58373] = { type = "random_root" },         -- Glyph of Hamstring
-			[23694] = { type = "random_root" },         -- Improved Hamstring
-			[47168] = { type = "random_root" },         -- Improved Wing Clip
-			[19185] = { type = "random_root" },         -- Entrapment
+			[1112494] = { type = "random_root" },         -- Frostbite
+			[1155080] = { type = "random_root" },         -- Shattered Barrier
+			[1158373] = { type = "random_root" },         -- Glyph of Hamstring
+			[1123694] = { type = "random_root" },         -- Improved Hamstring
+			[1147168] = { type = "random_root" },         -- Improved Wing Clip
+			[1119185] = { type = "random_root" },         -- Entrapment
 
-			[53359] = { type = "disarm" }, -- Chimera Shot (Scorpid)
-			[50541] = { type = "disarm" }, -- Snatch (Rank 1)
-			[53537] = { type = "disarm" }, -- Snatch (Rank 2)
-			[53538] = { type = "disarm" }, -- Snatch (Rank 3)
-			[53540] = { type = "disarm" }, -- Snatch (Rank 4)
-			[53542] = { type = "disarm" }, -- Snatch (Rank 5)
-			[53543] = { type = "disarm" }, -- Snatch (Rank 6)
-			[64346] = { type = "disarm" }, -- Fiery Payback
-			[64058] = { type = "disarm" }, -- Psychic Horror Disarm Effect
-			[51722] = { type = "disarm" }, -- Dismantle
-			[676]   = { type = "disarm" }, -- Disarm
+			[1153359] = { type = "disarm" }, -- Chimera Shot (Scorpid)
+			[1150541] = { type = "disarm" }, -- Snatch (Rank 1)
+			[1153537] = { type = "disarm" }, -- Snatch (Rank 2)
+			[1153538] = { type = "disarm" }, -- Snatch (Rank 3)
+			[1153540] = { type = "disarm" }, -- Snatch (Rank 4)
+			[1153542] = { type = "disarm" }, -- Snatch (Rank 5)
+			[1153543] = { type = "disarm" }, -- Snatch (Rank 6)
+			[1164346] = { type = "disarm" }, -- Fiery Payback
+			[1164058] = { type = "disarm" }, -- Psychic Horror Disarm Effect
+			[1151722] = { type = "disarm" }, -- Dismantle
+			[1100676] = { type = "disarm" }, -- Disarm
 
-			[47476] = { type = "silence" }, -- Strangulate
-			[34490] = { type = "silence" }, -- Silencing Shot
-			[35334] = { type = "silence" }, -- Nether Shock 1 -- TODO: verify
-			[44957] = { type = "silence" }, -- Nether Shock 2 -- TODO: verify
-			[18469] = { type = "silence" }, -- Silenced - Improved Counterspell (Rank 1)
-			[55021] = { type = "silence" }, -- Silenced - Improved Counterspell (Rank 2)
-			[63529] = { type = "silence" }, -- Silenced - Shield of the Templar
-			[15487] = { type = "silence" }, -- Silence
-			[1330]  = { type = "silence" }, -- Garrote - Silence
-			[18425] = { type = "silence" }, -- Silenced - Improved Kick
-			[24259] = { type = "silence" }, -- Spell Lock
+			[1147476] = { type = "silence" }, -- Strangulate
+			[1134490] = { type = "silence" }, -- Silencing Shot
+			[1135334] = { type = "silence" }, -- Nether Shock 1 -- TODO: verify
+			[1144957] = { type = "silence" }, -- Nether Shock 2 -- TODO: verify
+			[1118469] = { type = "silence" }, -- Silenced - Improved Counterspell (Rank 1)
+			[1155021] = { type = "silence" }, -- Silenced - Improved Counterspell (Rank 2)
+			[1163529] = { type = "silence" }, -- Silenced - Shield of the Templar
+			[1115487] = { type = "silence" }, -- Silence
+			[1101330] = { type = "silence" }, -- Garrote - Silence
+			[1118425] = { type = "silence" }, -- Silenced - Improved Kick
+			[1124259] = { type = "silence" }, -- Spell Lock
 			[1119647] = { type = "silence" }, -- Spell Lock
 			[1131117] = { type = "silence", strict = true }, -- Unstable Affliction (Ascension)
-			[31117] = { type = "silence", strict = true }, -- Unstable Affliction 2
-			[18498] = { type = "silence" }, -- Silenced - Gag Order (Shield Slam)
-			[74347] = { type = "silence" }, -- Silenced - Gag Order (Heroic Throw?)
-			[50613] = { type = "silence" }, -- Arcane Torrent (Racial, Runic Power)
-			[28730] = { type = "silence" }, -- Arcane Torrent (Racial, Mana)
-			[25046] = { type = "silence" }, -- Arcane Torrent (Racial, Energy)
+			[1131117] = { type = "silence", strict = true }, -- Unstable Affliction 2
+			[1118498] = { type = "silence" }, -- Silenced - Gag Order (Shield Slam)
+			[1174347] = { type = "silence" }, -- Silenced - Gag Order (Heroic Throw?)
+			[1150613] = { type = "silence" }, -- Arcane Torrent (Racial, Runic Power)
+			[1128730] = { type = "silence" }, -- Arcane Torrent (Racial, Mana)
+			[1125046] = { type = "silence" }, -- Arcane Torrent (Racial, Energy)
 
-			[64044] = { type = "horror" }, -- Psychic Horror
-			[6789]  = { type = "horror" }, -- Death Coil (Rank 1)
-			[17925] = { type = "horror" }, -- Death Coil (Rank 2)
-			[17926] = { type = "horror" }, -- Death Coil (Rank 3)
-			[27223] = { type = "horror" }, -- Death Coil (Rank 4)
-			[47859] = { type = "horror" }, -- Death Coil (Rank 5)
-			[47860] = { type = "horror" }, -- Death Coil (Rank 6)
+			[1164044] = { type = "horror" }, -- Psychic Horror
+			[1106789] = { type = "horror" }, -- Death Coil (Rank 1)
+			[1117925] = { type = "horror" }, -- Death Coil (Rank 2)
+			[1117926] = { type = "horror" }, -- Death Coil (Rank 3)
+			[1127223] = { type = "horror" }, -- Death Coil (Rank 4)
+			[1147859] = { type = "horror" }, -- Death Coil (Rank 5)
+			[1147860] = { type = "horror" }, -- Death Coil (Rank 6)
 
-			[1833]  = { type = "opener_stun" }, -- Cheap Shot
-			[9005]  = { type = "opener_stun" }, -- Pounce (Rank 1)
-			[9823]  = { type = "opener_stun" }, -- Pounce (Rank 2)
-			[9827]  = { type = "opener_stun" }, -- Pounce (Rank 3)
-			[27006] = { type = "opener_stun" }, -- Pounce (Rank 4)
-			[49803] = { type = "opener_stun" }, -- Pounce (Rank 5)
+			[1101833] = { type = "opener_stun" }, -- Cheap Shot
+			[1109005] = { type = "opener_stun" }, -- Pounce (Rank 1)
+			[1109823] = { type = "opener_stun" }, -- Pounce (Rank 2)
+			[1109827] = { type = "opener_stun" }, -- Pounce (Rank 3)
+			[1127006] = { type = "opener_stun" }, -- Pounce (Rank 4)
+			[1149803] = { type = "opener_stun" }, -- Pounce (Rank 5)
 
-			[31661] = { type = "scatter" }, -- Dragon's Breath (Rank 1)
-			[33041] = { type = "scatter" }, -- Dragon's Breath (Rank 2)
-			[33042] = { type = "scatter" }, -- Dragon's Breath (Rank 3)
-			[33043] = { type = "scatter" }, -- Dragon's Breath (Rank 4)
-			[42949] = { type = "scatter" }, -- Dragon's Breath (Rank 5)
-			[42950] = { type = "scatter" }, -- Dragon's Breath (Rank 6)
-			[19503] = { type = "scatter" }, -- Scatter Shot
+			[1131661] = { type = "scatter" }, -- Dragon's Breath (Rank 1)
+			[1133041] = { type = "scatter" }, -- Dragon's Breath (Rank 2)
+			[1133042] = { type = "scatter" }, -- Dragon's Breath (Rank 3)
+			[1133043] = { type = "scatter" }, -- Dragon's Breath (Rank 4)
+			[1142949] = { type = "scatter" }, -- Dragon's Breath (Rank 5)
+			[1142950] = { type = "scatter" }, -- Dragon's Breath (Rank 6)
+			[1119503] = { type = "scatter" }, -- Scatter Shot
 
 			-- Spells that DR with itself only
-			[33786] = { type = "cyclone" },        -- Cyclone
-			[605]   = { type = "mind_control" },   -- Mind Control
-			[13181] = { type = "mind_control" },   -- Gnomish Mind Control Cap
-			[67799] = { type = "mind_control" },   -- Mind Amplification Dish
-			[7922]  = { type = "charge" },         -- Charge Stun
-			[19306] = { type = "counterattack" },  -- Counterattack 1
-			[20909] = { type = "counterattack" },  -- Counterattack 2
-			[20910] = { type = "counterattack" },  -- Counterattack 3
-			[27067] = { type = "counterattack" },  -- Counterattack 4
-			[48998] = { type = "counterattack" },  -- Counterattack 5
-			[48999] = { type = "counterattack" },  -- Counterattack 6
+			[1133786] = { type = "cyclone" },        -- Cyclone
+			[1100605] = { type = "mind_control" },   -- Mind Control
+			[1113181] = { type = "mind_control" },   -- Gnomish Mind Control Cap
+			[1167799] = { type = "mind_control" },   -- Mind Amplification Dish
+			[1107922] = { type = "charge" },         -- Charge Stun
+			[1119306] = { type = "counterattack" },  -- Counterattack 1
+			[1120909] = { type = "counterattack" },  -- Counterattack 2
+			[1120910] = { type = "counterattack" },  -- Counterattack 3
+			[1127067] = { type = "counterattack" },  -- Counterattack 4
+			[1148998] = { type = "counterattack" },  -- Counterattack 5
+			[1148999] = { type = "counterattack" },  -- Counterattack 6
 
 			
 		},
