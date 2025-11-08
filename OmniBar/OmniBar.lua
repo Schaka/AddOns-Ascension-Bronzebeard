@@ -888,7 +888,9 @@ function OmniBar:AddSpellCast(event, sourceGUID, sourceName, sourceFlags, spellI
 	if (not ownerName) and bit_band(sourceFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == 0 then return end
 
 	-- don't track our own spells
-	if sourceGUID == UnitGUID("player") or sourceGUID == UnitGUID("pet") then return end
+	if sourceGUID == UnitGUID("player") or sourceGUID == UnitGUID("pet") then
+		return
+	end
 
 	if not addon.Cooldowns[spellID] then
 		print("OmniBar:", "Incorrect cooldown for", spellID)
@@ -933,7 +935,7 @@ function OmniBar:UNIT_SPELLCAST_SUCCEEDED(event, unit, spellName, _)
 	if (not addon.Cooldowns[spellID]) then return end
 
 	local sourceFlags = 0
-
+ 
 	if UnitReaction("player", unit) < 4 then
 		sourceFlags = sourceFlags + COMBATLOG_OBJECT_REACTION_HOSTILE
 	end
@@ -946,7 +948,7 @@ function OmniBar:UNIT_SPELLCAST_SUCCEEDED(event, unit, spellName, _)
 end
 
 function OmniBar:COMBAT_LOG_EVENT_UNFILTERED(event, ...)
-	local _, event, _, sourceGUID, sourceName, sourceFlags, _,_, spellID, spellName = ...
+	local _, event, sourceGUID, sourceName, sourceFlags, targetGUID, targetName, targetFlags, spellID, spellName = ...
 	if (event == "SPELL_CAST_SUCCESS" or event == "SPELL_AURA_APPLIED") then
 		if spellID == 0 and SPELL_ID_BY_NAME then spellID = SPELL_ID_BY_NAME[spellName] end
 		self:AddSpellCast(event, sourceGUID, sourceName, sourceFlags, spellID)
