@@ -1,0 +1,7 @@
+## Interface: 30000
+## Title: |cff7696bc c|rAutoConfirm
+## Version: 1.3
+## Notes: Automaticly confirms loot.
+## Author: Chimaine of EU-Blackrock
+
+cAutoConfirm.lua
