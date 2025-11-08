@@ -887,6 +887,9 @@ function OmniBar:AddSpellCast(event, sourceGUID, sourceName, sourceFlags, spellI
 	-- only track players and their pets
 	if (not ownerName) and bit_band(sourceFlags, COMBATLOG_OBJECT_TYPE_PLAYER) == 0 then return end
 
+	-- don't track our own spells
+	if sourceGUID == UnitGUID("player") or sourceGUID == UnitGUID("pet") then return end
+
 	if not addon.Cooldowns[spellID] then
 		print("OmniBar:", "Incorrect cooldown for", spellID)
 	end	
