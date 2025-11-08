@@ -112,7 +112,7 @@ addon.Spells = {
     [1116621] = { type = IMMUNITY }, -- Invulnerable Mail
     [1101090] = { type = CROWD_CONTROL }, -- Magic Dust
     [1113327] = { type = CROWD_CONTROL }, -- Reckless Charge
-    [835] = { type = CROWD_CONTROL }, -- Tidal Charm
+    [1100835] = { type = CROWD_CONTROL }, -- Tidal Charm
     [1111359] = { type = BUFF_OFFENSIVE }, -- Restorative Potion
     [1105024] = { type = BUFF_OFFENSIVE }, -- Skull of Impending Doom
     [1102379] = { type = BUFF_OFFENSIVE }, -- Swiftness Potion
@@ -158,10 +158,10 @@ addon.Spells = {
     [1126679] = { type = INTERRUPT, duration = 3 }, -- Deadly Throw
     [1106552] = { type = INTERRUPT, duration = 4 }, -- Pummel
         [1106554] = { parent = 1106552 },
-    [72] = { type = INTERRUPT, duration = 6 }, -- Shield Bash
-        [1101671] = { parent = 72 },
-        [1101672] = { parent = 72 },
-        [1129704] = { parent = 72 },
+    [1100072] = { type = INTERRUPT, duration = 6 }, -- Shield Bash
+        [1101671] = { parent = 1100072 },
+        [1101672] = { parent = 1100072 },
+        [1129704] = { parent = 1100072 },
     [1122570] = { type = INTERRUPT, duration = 3 }, -- Maim
     [1129443] = { type = INTERRUPT, duration = 10 }, -- Clutch of Foresight
 
@@ -176,18 +176,18 @@ addon.Spells = {
     [1164843] = { type = BUFF_DEFENSIVE, },  -- Divine Hymn
     [1164901] = { type = BUFF_DEFENSIVE, }, -- Hymn of Hope
 
-    [17] = { type = BUFF_DEFENSIVE }, -- Power Word: Shield
-        [592] = { parent = 17 }, -- Power Word: Shield
-        [600] = { parent = 17 },
-        [1103747] = { parent = 17 },
-        [1106065] = { parent = 17 },
-        [1106066] = { parent = 17 },
-        [1110898] = { parent = 17 },
-        [1110899] = { parent = 17 },
-        [1110900] = { parent = 17 },
-        [1110901] = { parent = 17 },
-        [1110901] = { parent = 17 },
-    [605] = { type = CROWD_CONTROL }, -- Mind Control
+    [1100017] = { type = BUFF_DEFENSIVE }, -- Power Word: Shield
+        [1100592] = { parent = 1100017 }, -- Power Word: Shield
+        [1100600] = { parent = 1100017 },
+        [1103747] = { parent = 1100017 },
+        [1106065] = { parent = 1100017 },
+        [1106066] = { parent = 1100017 },
+        [1110898] = { parent = 1100017 },
+        [1110899] = { parent = 1100017 },
+        [1110900] = { parent = 1100017 },
+        [1110901] = { parent = 1100017 },
+        [1110901] = { parent = 1100017 },
+    [1100605] = { type = CROWD_CONTROL }, -- Mind Control
         [1110911] = { parent = 1100605 },
         [1110912] = { parent = 1100605 },
     [1108122] = { type = CROWD_CONTROL }, -- Psychic Scream
@@ -229,7 +229,7 @@ addon.Spells = {
         [1106215] = { parent = 1105782 },
     [1105484] = { type = CROWD_CONTROL }, -- Howl of Terror
         [1117928] = { parent = 1105484 },
-    [710] = { type = CROWD_CONTROL }, -- Banish
+    [1100710] = { type = CROWD_CONTROL }, -- Banish
         [1118647] = { parent = 1100710 },
     [1106789] = { type = CROWD_CONTROL }, -- Death Coil
         [1117925] = { parent = 1106789 },
@@ -335,11 +335,11 @@ addon.Spells = {
     [1101022] = { type = IMMUNITY },-- Blessing of Protection
         [1105599] = { parent = 1101022 },
         [1110278] = { parent = 1101022 },
-    [642] = { type = IMMUNITY }, -- Divine Shield
+    [1100642] = { type = IMMUNITY }, -- Divine Shield
         [498] = { parent = 1100642 },
         [1101020] = { parent = 1100642 },
         [1105573] = { parent = 1100642 },
-    [853] = { type = CROWD_CONTROL }, -- Hammer of Justice
+    [1100853] = { type = CROWD_CONTROL }, -- Hammer of Justice
         [1105588] = { parent = 1100853 },
         [1105589] = { parent = 1100853 },
         [1110308] = { parent = 1100853 },
@@ -457,7 +457,7 @@ addon.Spells = {
     [1169369] = { type = BUFF_OFFENSIVE, }, -- Predator's Swiftness
 
     [1122812] = { type = BUFF_DEFENSIVE }, -- Barkskin
-    [339] = { type = ROOT }, -- Entangling Roots
+    [1100339] = { type = ROOT }, -- Entangling Roots
         [1101062] = { parent = 1100339 },
         [1105195] = { parent = 1100339 },
         [1105196] = { parent = 1100339 },
@@ -492,7 +492,7 @@ addon.Spells = {
         [1116812] = { parent = 1116689 },
         [1116813] = { parent = 1116689 },
         [1117329] = { parent = 1116689 },
-    [770] = { type = BUFF_OTHER }, -- Faerie Fire
+    [1100770] = { type = BUFF_OTHER }, -- Faerie Fire
         [1116857] = { parent = 1100770 }, -- Faerie Fire (Feral)
     [1133786] = { type = CROWD_CONTROL }, -- Cyclone
     [1119675] = { type = ROOT }, -- Feral Charge Effect
@@ -501,7 +501,7 @@ addon.Spells = {
 
     [113801] = { type = CROWD_CONTROL }, -- Bash (Force of Nature - Feral Treants)
     [102795] = { type = CROWD_CONTROL }, -- Bear Hug
-    [99] = { type = CROWD_CONTROL }, -- Disorienting Roar
+    [1100099] = { type = CROWD_CONTROL }, -- Disorienting Roar
     [102546] = { type = CROWD_CONTROL }, -- Pounce (Incarnation)
     [114238] = { type = CROWD_CONTROL }, -- Fae Silence (Glyph of Fae Silence)
     [113770] = { type = ROOT }, -- Entangling Roots (Force of Nature - Balance Treants)
@@ -524,7 +524,7 @@ addon.Spells = {
     [1155021] = { type = CROWD_CONTROL, }, -- Improved Counterspell
     [1164346] = { type = CROWD_CONTROL, }, -- Fiery Payback (Fire Mage Disarm)
 
-    [118] = { type = CROWD_CONTROL }, -- Polymorph
+    [1100118] = { type = CROWD_CONTROL }, -- Polymorph
         [1112824] = { parent = 1100118 },
         [1112825] = { parent = 1100118 },
         [1112826] = { parent = 1100118 },
@@ -540,7 +540,7 @@ addon.Spells = {
         [1113031] = { parent = 1111426 },
         [1113032] = { parent = 1111426 },
         [1113033] = { parent = 1111426 },
-    [543] = { type = BUFF_DEFENSIVE }, -- Fire Ward
+    [1100543] = { type = BUFF_DEFENSIVE }, -- Fire Ward
         [1108457] = { parent = 1100543 },
         [1108458] = { parent = 1100543 },
         [1110223] = { parent = 1100543 },
@@ -553,8 +553,8 @@ addon.Spells = {
         [1128609] = { parent = 1106143 },
         [1143012] = { parent = 1106143 },
     [1112494] = { type = ROOT }, -- Frostbite
-    [122] = { type = ROOT }, -- Frost Nova
-        [865] = { parent = 1100122 },
+    [1100122] = { type = ROOT }, -- Frost Nova
+        [1100865] = { parent = 1100122 },
         [1106131] = { parent = 1100122 },
         [1110230] = { parent = 1100122 },
         [1127088] = { parent = 1100122 },
@@ -602,7 +602,7 @@ addon.Spells = {
     [1113877] = { type = BUFF_OFFENSIVE}, -- Blade Flurry
     [1180000] = { type = BUFF_OFFENSIVE}, -- Shadow Blades
     [1101833] = { type = CROWD_CONTROL }, -- Cheap Shot
-    [408] = { type = CROWD_CONTROL }, -- Kidney Shot
+    [110408] = { type = CROWD_CONTROL }, -- Kidney Shot
         [1108643] = { parent = 1100408 },
     [1102070] = { type = CROWD_CONTROL }, -- Sap
         [1106770] = { parent = 1102070 },
@@ -658,7 +658,7 @@ addon.Spells = {
     [1118498] = { type = CROWD_CONTROL }, -- Improved Shield Bash
     [1120230] = { type = IMMUNITY }, -- Retaliation
     [1101719] = { type = BUFF_OFFENSIVE }, -- Recklessness
-    [871] = { type = BUFF_DEFENSIVE }, -- Shield Wall
+    [1100871] = { type = BUFF_DEFENSIVE }, -- Shield Wall
     [1112292] = { type = BUFF_OFFENSIVE }, -- Death Wish
     [1123694] = { type = ROOT }, -- Improved Hamstring
     [1118499] = { type = BUFF_OFFENSIVE }, -- Berserker Rage
@@ -673,7 +673,7 @@ addon.Spells = {
     [1105530] = { type = CROWD_CONTROL }, -- Mace Spec Stun (Warrior & Rogue)
     [1105246] = { type = CROWD_CONTROL }, -- Intimidating Shout
         [1120511] = { parent = 1105246 },
-    [676] = { type = BUFF_OTHER }, -- Disarm
+    [1100676] = { type = BUFF_OTHER }, -- Disarm
     [1123920] = { type = IMMUNITY_SPELL }, -- Spell Reflection
     [1112976] = { type = BUFF_DEFENSIVE }, -- Last Stand
     [1156112] = { type = BUFF_OTHER }, -- Furious Attacks

@@ -1406,7 +1406,7 @@ end
 local Default_CompactUnitFrame_UtilIsPriorityDebuff
 
 local function CompactUnitFrame_UtilIsPriorityDebuff_BD(unit, index, filter)
-    local _, _, _, _, _, _, _, _, _, _, spellId = UnitDebuff(unit, index, filter)
+    local name, rank, icon, count, debuffType, duration, expirationTime, unitCaster, canStealOrPurge, _, spellId, canApplyAura, isBossAura = UnitDebuff(unit, index, filter)
     return BigDebuffs:IsPriorityDebuff(spellId) or Default_CompactUnitFrame_UtilIsPriorityDebuff(unit, index, filter)
 end
 
@@ -1700,6 +1700,10 @@ end
 function BigDebuffs:IsPriorityBigDebuff(id)
     if not self.Spells[id] then return end
     id = self.Spells[id].parent or id -- Check for parent spellID
+    if not self.Spells[id] then
+        print("Not a valid parent reference", id)
+        return
+    end    
     return self.Spells[id].priority
 end
 
